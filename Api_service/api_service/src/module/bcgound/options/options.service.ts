@@ -127,11 +127,23 @@ export class OptionsService {
 		          return school
 		        }),
 		      );
-		  	
 		  return {
 		  	schools:data,
 		  	total:totalCount
 		  }
+	}
+	//获取首页总体信息展示，方案总数，学生总数
+	async getHomeList(ids: number[]){
+		//根据用户id查找学生总数，再根据学生依次查找方案数量
+		//如果没有学生则没有方案
+		if(ids.length===0){
+			return 0
+		}
+		const count = await this.options
+			.createQueryBuilder('options')
+			.where('stu_id IN (:...ids)', { ids })
+			.getCount();
+		return count;
 	}
 	
 	

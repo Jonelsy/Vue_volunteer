@@ -1,13 +1,15 @@
 import { OptionsService } from './options.service'
-import { Body, Controller, Get, Param, Post, UseGuards,Headers ,Query} from '@nestjs/common';
+import {Body, Controller, Get, Param, Post, UseGuards, Headers, Query, Inject} from '@nestjs/common';
 import {ApiOperation,ApiTags,ApiBody,ApiConsumes, ApiBearerAuth, ApiParam,ApiQuery} from '@nestjs/swagger'
 import { AuthGuard } from '@nestjs/passport';
 import {Option_school, Option_subject} from './entity/options.entity'
-
+//引入studentService
+import {StudentService} from '../student/student.service'
 @Controller('options')
 @ApiTags('志愿管理')
 export class OptionsController {
-	constructor(private OptionsService:OptionsService,){}
+	constructor(private OptionsService:OptionsService,
+				@Inject(StudentService)private Studentservice:StudentService){}
 	
 	@Get('getOptions')
 	//swagger使用请求头
@@ -133,8 +135,23 @@ export class OptionsController {
 	@ApiBearerAuth('jwt')
 	@ApiOperation({summary:'获取整体方案数据'})
 	@ApiConsumes('application/x-www-form-urlencoded')
-	@ApiQuery({ name: 'option_id', description: '方案id', required: false, type: Number,example:'1' })
-	async getHome(@Query() query:{option_id?:number} ){
-		// return await this.OptionsService.getHomeList(query)
+	@ApiQuery({ name: 'user_id', description: '用户id', required: true, type: Number,example:'1' })
+	async getHome(@Query() query:{user_id:number} ){
+		//学生相关总数
+		let Students = await this.Studentservice.getTotalStudent(query.user_id)
+		//方案相关总数
+		const ids = Students.students.map(student => student.id);
+
+		let OptionsTotal = await this.OptionsService.getHomeList(ids)
+		//用户相关总数
+
+
+		return {
+			code:0,
+			data:{
+				StudentsTotal:Students.studentTotal,
+				OptionsTotal
+			}
+		}
 	}
 }

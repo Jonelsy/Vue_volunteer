@@ -15,8 +15,6 @@ export const getOption = (data:getOptionType)=>{
             stuId: data.stuId
         }
     })
-
-
 }
 
 export const delOption = (id:number)=>{

@@ -103,4 +103,14 @@ export class StudentService {
 		await this.student.update(params.id,params)
 		return{code:0,mes:'修改成功'}
 	}
+
+	//获取学生总数，给optionsService使用
+	async getTotalStudent(user_id:number){
+		let students = await this.student.find({where:{user_id:user_id}})
+		let studentTotal = await this.student.count({where:{user_id:user_id}})
+		return {
+			students,
+			studentTotal
+		}
+	}
 }

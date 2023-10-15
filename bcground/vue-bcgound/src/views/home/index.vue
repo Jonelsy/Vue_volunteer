@@ -42,13 +42,13 @@
         </el-col>
         <el-col :span="8">
           <div class="statistic-card">
-            <el-statistic :value="0">
+            <el-statistic :value="datas.optionTotal">
               <template #title>
                 <div style="display: inline-flex; align-items: center">
-                  今日方案下载量
+                  方案总数
                   <el-tooltip
                       effect="dark"
-                      content="统计方案下载次数"
+                      content="您个性化一对一方案数量"
                       placement="top"
                   >
                     <el-icon style="margin-left: 4px" :size="12">
@@ -73,10 +73,10 @@
         </el-col>
         <el-col :span="8">
           <div class="statistic-card">
-            <el-statistic :value="0" title="今日新增方案">
+            <el-statistic :value="datas.studentTotal" title="我的学生数量">
               <template #title>
                 <div style="display: inline-flex; align-items: center">
-                  今日新增方案
+                  我的学生数量
                 </div>
               </template>
             </el-statistic>
@@ -110,7 +110,8 @@
 <script lang="ts" setup>
 import userUserStore from  '@/store/userStore/userStore'
 import * as echarts from 'echarts';
-import {onMounted, reactive} from "vue";
+import {onBeforeUnmount, onMounted, reactive} from "vue";
+import {getHomeItem} from "@/api/Home";
 let useStore = userUserStore()
 
 
@@ -273,8 +274,24 @@ const initR_Echars = ()=>{
 onMounted(()=>{
   initR_Echars()
 })
-
-
+onBeforeUnmount(()=>{
+  let chartDom = echarts.init(document.getElementById('Echars')!);
+  let chartRightDom = echarts.init(document.getElementById('E_Right')!);
+  chartDom.dispose()
+  chartRightDom.dispose()
+})
+//获取首页数据
+const datas = reactive({
+  studentTotal:0,
+  optionTotal:0,
+})
+const getIndexItem = ()=>{
+  getHomeItem(useStore.users.userid).then(res=>{
+    datas.studentTotal=res.data.data.StudentsTotal
+    datas.optionTotal = res.data.data.OptionsTotal
+  })
+}
+getIndexItem()
 </script>
 
 
