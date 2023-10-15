@@ -145,6 +145,18 @@ export class OptionsService {
 			.getCount();
 		return count;
 	}
+	//获取optionsSchool数据汇总
+	async getOptionSchol(){
+		const queryBuilder = this.option_school.createQueryBuilder('os');
+		const result = await queryBuilder
+			.select('os.CollegeName', 'name')
+			.addSelect('COUNT(os.CollegeName)', 'value')
+			.groupBy('os.CollegeName')
+			.orderBy('value', 'DESC')
+			.limit(5)
+			.getRawMany();
+		return result
+	}
 	
 	
 }

@@ -29,6 +29,10 @@ export class Option_school{
 	@ApiProperty()
 	@PrimaryGeneratedColumn()
 	id:number
+
+	@ApiProperty()
+	@Column()
+	optionSchool_id:number
 	
 	@ApiProperty()
 	@Column()
@@ -74,6 +78,10 @@ export class Option_subject{
 	@ApiProperty()
 	@PrimaryGeneratedColumn()
 	id:number
+
+	@ApiProperty()
+	@Column()
+	optionSubject_id:number
 	
 	@ApiProperty()
 	@Column()

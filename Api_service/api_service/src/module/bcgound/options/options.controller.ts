@@ -143,14 +143,15 @@ export class OptionsController {
 		const ids = Students.students.map(student => student.id);
 
 		let OptionsTotal = await this.OptionsService.getHomeList(ids)
-		//用户相关总数
-
+		//获取option-school中的院校统计
+		let OptionsSchool = await this.OptionsService.getOptionSchol()
 
 		return {
 			code:0,
 			data:{
 				StudentsTotal:Students.studentTotal,
-				OptionsTotal
+				OptionsTotal,
+				OptionsSchool
 			}
 		}
 	}

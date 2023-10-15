@@ -321,8 +321,12 @@ const insertOptions=()=>{
     state.selectedRow.forEach(item=>{
       item.option_id = $route.query.option_id
       if(item.children){
+        item.optionSchool_id = item.id
+        item.id=0
         schools.push(item)
       }else{
+        item.optionSubject_id = item.id
+        item.id=0
         subjects.push(item)
       }
     })
