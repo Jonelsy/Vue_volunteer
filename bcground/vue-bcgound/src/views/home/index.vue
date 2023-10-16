@@ -121,18 +121,20 @@ const datas = reactive({
 })
 let optionSchhol=[]
 const getIndexItem = ()=>{
-  getHomeItem(useStore.users.userid).then(res=>{
-    datas.studentTotal=res.data.data.StudentsTotal
-    datas.optionTotal = res.data.data.OptionsTotal
-    optionSchhol = res.data.data.OptionsSchool
-    optionSchhol.forEach(item=>{
-      item.value = Number(item.value)
+
+    getHomeItem(Number(localStorage.getItem('userId'))).then(res=>{
+      datas.studentTotal=res.data.data.StudentsTotal
+      datas.optionTotal = res.data.data.OptionsTotal
+      optionSchhol = res.data.data.OptionsSchool
+      optionSchhol.forEach(item=>{
+        item.value = Number(item.value)
+      })
+      //给图标赋值后挂载
+      option.series[0].data = optionSchhol
+      initEchars()
+      initR_Echars()
     })
-   //给图标赋值后挂载
-    option.series[0].data = optionSchhol
-    initEchars()
-    initR_Echars()
-  })
+
 
 }
 getIndexItem()
@@ -156,8 +158,8 @@ const option:any = reactive({
 
   visualMap: {
     show: false,
-    min: 100,
-    max: 600,
+    min: 0,
+    max: 100,
     inRange: {
       colorLightness: [0.5, 1]
     }
@@ -211,7 +213,7 @@ const initEchars = ()=>{
   for (let i = 0; i < data.length; i++) {
     dataShadow.push(yMax);
   }
-const R_option:EChartsOption = reactive({
+const R_option:any = reactive({
     title: {
       text: '近年份各专业报考热度比例',
       subtext: 'In recent years, the proportion of the popularity of each major'
