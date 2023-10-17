@@ -27,11 +27,11 @@ export class Options{
 export class Option_school{
 	
 	@ApiProperty()
-	@PrimaryGeneratedColumn()
-	id:number
-
-	@ApiProperty()
 	@Column()
+	id:number
+	//这是主键
+	@ApiProperty()
+	@PrimaryGeneratedColumn()
 	optionSchool_id:number
 	
 	@ApiProperty()
@@ -76,11 +76,11 @@ export class Option_school{
 export class Option_subject{
 	
 	@ApiProperty()
-	@PrimaryGeneratedColumn()
-	id:number
-
-	@ApiProperty()
 	@Column()
+	id:number
+	//下方主键
+	@ApiProperty()
+	@PrimaryGeneratedColumn()
 	optionSubject_id:number
 	
 	@ApiProperty()

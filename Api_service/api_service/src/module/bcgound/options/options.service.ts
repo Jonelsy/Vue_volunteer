@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Param } from '@nestjs/common';
 //对数据库进行增删改查需引入如下
 import {Repository,Like} from 'typeorm'
 import {InjectRepository} from '@nestjs/typeorm'
@@ -66,6 +66,7 @@ export class OptionsService {
 	//方案增加学校
 	async insertOptionSchool(params:any){
 		//先清空所有原本方案
+		console.log(params)
 		await this.option_school.delete({option_id:params[0].option_id})
 		await this.option_school.save(params);
 		return{code:0,mes:'学校同步成功'}
