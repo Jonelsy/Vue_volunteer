@@ -9,6 +9,7 @@ import { UserModule } from './module/bcgound/user/user.module';
 import { StudentModule } from './module/bcgound/student/student.module';
 import { OptionsModule } from './module/bcgound/options/options.module';
 import { SchoolModule } from './module/bcgound/school/school.module';
+import { MitModule } from './module/bcgound/mit/mit.module';
 
 
 
@@ -19,7 +20,7 @@ import { SchoolModule } from './module/bcgound/school/school.module';
 // }
 
 @Module({
-  imports: [DbModule, UserModule, StudentModule, OptionsModule, SchoolModule],
+  imports: [DbModule, UserModule, StudentModule, OptionsModule, SchoolModule, MitModule],
   controllers: [AppController],
   providers: [AppService],
 })
