@@ -11,6 +11,10 @@ export class MitService {
 
     //获取
     async getList(){
-        return await this.mit.find()
+        return await this.mit.find({
+            order: {
+                title_id: "ASC"
+            },
+        })
     }
 }

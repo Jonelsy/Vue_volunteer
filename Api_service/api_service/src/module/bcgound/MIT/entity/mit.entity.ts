@@ -11,7 +11,7 @@ export class Mit{
 
     @ApiProperty()
     @Column()
-    title_id:string
+    title_id:number
 
 
     @ApiProperty()

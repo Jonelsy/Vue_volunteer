@@ -85,6 +85,14 @@ const routes: Array<RouteRecordRaw> = [
           title:'方案预览'
         },
       },
+      {
+        path: '/mitList',
+        name: 'mitList',
+        component: () => import('../views/MIT/mitList.vue'),
+        meta:{
+          title:'性格测试'
+        },
+      },
     ]
   },
   {

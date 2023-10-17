@@ -281,7 +281,7 @@ const handleSubClick = (row:MyObject) => {
 };
 const rowClassName = (item:any) => {
   let result = state.selectedRow.findIndex(items=>{
-    return items.id === item.row.id
+    return items.optionSchool_id === item.row.id||items.optionSubject_id === item.row.id
   })
   return result !== -1?'hightline':''
 };

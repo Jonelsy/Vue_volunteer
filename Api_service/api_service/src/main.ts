@@ -27,6 +27,6 @@ async function bootstrap() {
 	app.enableCors()
 	//配置数据处理
 	 app.use(urlencoded({ extended: true })); // 添加这行代码
-  await app.listen(3000);
+  await app.listen(3030);
 }
 bootstrap();

@@ -36,6 +36,10 @@
         <el-icon><School/></el-icon>
         <template #title><span>院校查询</span></template>
       </el-menu-item>
+      <el-menu-item index="/mitList">
+        <el-icon><DataAnalysis/></el-icon>
+        <template #title><span>性格测试</span></template>
+      </el-menu-item>
     </el-menu>
   </el-scrollbar>
 </template>
