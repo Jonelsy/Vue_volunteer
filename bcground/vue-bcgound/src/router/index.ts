@@ -93,6 +93,14 @@ const routes: Array<RouteRecordRaw> = [
           title:'性格测试'
         },
       },
+      {
+        path: '/mitAnswer',
+        name: 'mitAnswer',
+        component: () => import('../views/MIT/mitAnswer.vue'),
+        meta:{
+          title:'性格查看'
+        },
+      },
     ]
   },
   {

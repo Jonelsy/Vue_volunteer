@@ -66,7 +66,6 @@ export class OptionsService {
 	//方案增加学校
 	async insertOptionSchool(params:any){
 		//先清空所有原本方案
-		console.log(params)
 		await this.option_school.delete({option_id:params[0].option_id})
 		await this.option_school.save(params);
 		return{code:0,mes:'学校同步成功'}

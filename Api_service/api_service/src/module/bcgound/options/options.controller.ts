@@ -81,8 +81,7 @@ export class OptionsController {
 	@ApiBearerAuth('jwt')
 	@ApiConsumes('application/json')
 	@ApiBody({ type: [Option_school] }) // 使用 `ApiBody` 装饰器，指定参数为数组对象类型，并引用相应的 DTO 类
-	async createItems(@Body() items: Option_school[]){ // 使用 `@Body` 装饰器，接收请求体中的数据 
-
+	async createItems(@Body() items: Option_school[]){ // 使用 `@Body` 装饰器，接收请求体中的数据
 		return await this.OptionsService.insertOptionSchool(items)
 	}
 	
@@ -94,7 +93,6 @@ export class OptionsController {
 	@ApiConsumes('application/json')
 	@ApiBody({ type: [Option_subject] }) // 使用 `ApiBody` 装饰器，指定参数为数组对象类型，并引用相应的 DTO 类
 	async createSubject(@Body() items: Option_subject[]){ // 使用 `@Body` 装饰器，接收请求体中的数据
-
 		return await this.OptionsService.insertOptionSubject(items)
 	  }
 	  
