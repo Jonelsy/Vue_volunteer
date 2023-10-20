@@ -14,3 +14,11 @@ export const AnswerMit = (data:mitList)=>{
 export const getGard = ()=>{
     return request.get('/mit/getGrade')
 }
+//获取适合专业
+export const getMajor = (data:string)=>{
+    return request.post('/mit/MitAnswer',{code:data})
+}
+//清除数据库临时计算表
+export const clearMit = ()=>{
+    return request.get('/mit/MitAnswer')
+}

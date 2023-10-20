@@ -69,4 +69,14 @@ export class MitController {
     async MitAnswer(@Body() params:any){
         return await this.Mitservice.getLikeMajor(params)
     }
+
+    @Get('clearMit')
+    //swagger使用请求头
+    @UseGuards(AuthGuard('jwt'))
+    @ApiBearerAuth('jwt')
+    @ApiOperation({summary:'清除临时计算表结果'})
+    @ApiConsumes('application/x-www-form-urlencoded')
+    async clearMitGrade(){
+        return await this.Mitservice.clearMitSum()
+    }
 }

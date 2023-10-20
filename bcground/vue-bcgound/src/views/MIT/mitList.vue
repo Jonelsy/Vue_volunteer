@@ -94,8 +94,8 @@ const begin = ()=>{
 const show = ref(true)
 //表单
 const ruleForm = reactive({
-  resource1:0,
-  resource2:0,
+  resource1:null,
+  resource2:null,
 })
 //表单校验
 //表单检验规则
@@ -130,43 +130,43 @@ const mitList = ref<mitLists[]>([])
 const indexs = ref(0)
 //下一题
 let ruleForms = ref()
-const nextQues = async (formEl: any | undefined)=>{
-  await ruleForms.value.validate()
-  let data1 = {
-    id:0,
-    title_id:mitList.value[indexs.value].title_id,
-    title:mitList.value[indexs.value].title,
-    question:mitList.value[indexs.value].question,
-    type:mitList.value[indexs.value].type,
-    grade:ruleForm.resource1
-  }
-  let data2 = {
-    id:0,
-    title_id:mitList.value[indexs.value+1].title_id,
-    title:mitList.value[indexs.value+1].title,
-    question:mitList.value[indexs.value+1].question,
-    type:mitList.value[indexs.value+1].type,
-    grade:ruleForm.resource2
-  }
-  const loading = startCustomLoading(customOptions)
-  await AnswerMit(data1)
-  await AnswerMit(data2)
-  if(indexs.value===mitList.value.length-2){
-    //查看结果
-    let res = await getGard()
-
-    //跳转页面
-    $router.push({
-      path:'/mitAnswer',
-      query: {
-        data:res.data
-      }
-    })
-  }else{
-    indexs.value=indexs.value+2
-  }
-  resetForm(formEl)
-  stopCustomLoading(loading)
+const nextQues = (formEl: any | undefined)=>{
+  ruleForms.value.validate().then(async()=>{
+    let data1 = {
+      id:0,
+      title_id:mitList.value[indexs.value].title_id,
+      title:mitList.value[indexs.value].title,
+      question:mitList.value[indexs.value].question,
+      type:mitList.value[indexs.value].type,
+      grade:ruleForm.resource1
+    }
+    let data2 = {
+      id:0,
+      title_id:mitList.value[indexs.value+1].title_id,
+      title:mitList.value[indexs.value+1].title,
+      question:mitList.value[indexs.value+1].question,
+      type:mitList.value[indexs.value+1].type,
+      grade:ruleForm.resource2
+    }
+    const loading = startCustomLoading(customOptions)
+    await AnswerMit(data1)
+    await AnswerMit(data2)
+    if(indexs.value===mitList.value.length-2){
+      //查看结果
+      let res = await getGard()
+      //跳转页面
+      $router.push({
+        path:'/mitAnswer',
+        query: {
+          data:res.data
+        }
+      })
+    }else{
+      indexs.value=indexs.value+2
+    }
+    resetForm(formEl)
+    stopCustomLoading(loading)
+  })
 }
 //清除表单校验
 const resetForm = (formEl: any | undefined) => {

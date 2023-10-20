@@ -34,10 +34,8 @@ export class MitService {
             .addSelect('SUM(MitSum.grade)', 'totalGrade')
             .groupBy('MitSum.type')
             .getRawMany();
-
         //处理汇总
         let arrs = []
-
         for (let i =0;i<=gradesByType.length-2;i+=2) {
             if(gradesByType[i].totalGrade<=gradesByType[i+1].totalGrade){
                 arrs.push(gradesByType[i+1].MitSum_type)
@@ -52,5 +50,10 @@ export class MitService {
     //查询适合专业
     async getLikeMajor(params){
         return await this.Mitexplain.find({where:{mit_code:params.code}})
+    }
+
+    //清除mit计算表
+    async clearMitSum(){
+        return await this.Mitsum.clear()
     }
 }

@@ -4,5 +4,5 @@ export interface mitList{
     title:string,
     question:string,
     type:string,
-    grade:number
+    grade:number|null
 }
