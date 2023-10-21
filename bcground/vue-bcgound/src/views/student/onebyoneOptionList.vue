@@ -11,10 +11,10 @@
     </el-card>
     <div class="main">
       <el-table :data="data.tableData"  style="width: 100%;height:100%;margin-top: 20px" border stripe size="large">
-        <el-table-column prop="stu_name" label="姓名" width="150" />
-        <el-table-column prop="nation" label="民族" width="150" />
-        <el-table-column prop="stu_age" label="年龄" width="150"/>
-        <el-table-column label="性别" width="150">
+        <el-table-column prop="stu_name" label="姓名" width="100" />
+        <el-table-column prop="nation" label="民族" width="100" />
+        <el-table-column prop="stu_age" label="年龄" width="100"/>
+        <el-table-column label="性别" width="100">
           <template #default="scope">
             <span>{{scope.row.stu_sex==1?'男':'女'}}</span>
           </template>
@@ -24,8 +24,17 @@
             <span>{{scope.row.subject==1?'普通理科':'普通文科'}}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="recore" label="成绩" width="120"/>
-        <el-table-column prop="ranking" label="等效排名" width="120"/>
+        <el-table-column prop="recore" label="成绩" width="100"/>
+        <el-table-column prop="ranking" label="等效排名" width="100"/>
+        <el-table-column label="性格测试" width="200">
+          <template #default="scope">
+            <el-image style="width: 160px; height: 90px"
+                      :src="require('../../../../../Api_service/api_service/uploads/'+scope.row.pic_major)"
+                      :preview-src-list="[require('../../../../../Api_service/api_service/uploads/'+scope.row.pic_major)]"
+                      preview-teleported="true"
+            />
+          </template>
+        </el-table-column>
         <el-table-column label="备注" width="200">
           <template #default="scope">
             <el-text class="w-100px" truncated>{{scope.row.remark}}</el-text>
@@ -152,7 +161,7 @@ const editStudent = (item:any)=>{
   }
 }
 .pagination{
-  position: absolute;
+  position: relative;
   bottom:0;
   height: 40px;
   width: 90%;

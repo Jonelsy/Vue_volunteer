@@ -20,5 +20,5 @@ export const getMajor = (data:string)=>{
 }
 //清除数据库临时计算表
 export const clearMit = ()=>{
-    return request.get('/mit/MitAnswer')
+    return request.get('/mit/clearMit')
 }

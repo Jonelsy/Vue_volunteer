@@ -44,6 +44,10 @@ export class Student{
 	@ApiProperty()
 	@Column()
 	ranking?:number
+
+	@ApiProperty()
+	@Column()
+	pic_major?:string
 }
 //排名实体类
 @Entity({ name: 'math_ranking_table' })

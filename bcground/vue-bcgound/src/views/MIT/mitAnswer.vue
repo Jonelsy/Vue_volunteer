@@ -7,7 +7,7 @@
 
 <script lang="ts" setup>
 import {useRoute} from "vue-router";
-import {getMajor} from "@/api/MIT";
+import {clearMit, getMajor} from "@/api/MIT";
 import {onBeforeUnmount, reactive} from "vue";
 //引入截图相关组件
 import html2canvas from "html2canvas"
@@ -59,7 +59,7 @@ let option = reactive({
       type: 'radar',
       data: [
         {
-          value: [42, 40, 35, 35, 45, 48],
+          value: [42, 40, 35, 35, 45, 48,49],
           name: ''
         },
       ]
@@ -67,9 +67,11 @@ let option = reactive({
   ]
 })
 //销毁
-onBeforeUnmount(()=>{
+onBeforeUnmount(async ()=>{
   let chartDom = echarts.init(document.getElementById('mainEchart')!);
   chartDom.dispose()
+  //执行清空后台数据接口
+  await clearMit()
 })
 //截图相关组件
 const generateImg = ()=>{
@@ -85,6 +87,8 @@ const generateImg = ()=>{
     let imgData = canvas.toDataURL("image/jpeg"); // 转base64
     fileDownload(imgData);
   });
+
+  //下载后选择绑定的学生
 };
 // 下载图片方法
 const fileDownload = (downloadUrl:string) => {
