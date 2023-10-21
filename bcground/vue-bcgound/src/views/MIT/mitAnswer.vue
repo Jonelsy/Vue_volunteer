@@ -1,14 +1,69 @@
 <template>
   <el-button class="screenshotBtn button" type="text" @click="generateImg()">一键截图</el-button>
+  <el-button class="screenshotBtn button" type="text" @click="bandStu()">绑定学生</el-button>
 <div id="mainEchart">
 
 </div>
+  <!--      侧拉框-->
+  <el-drawer v-model="drawer" title="选择绑定的学生" :with-header="false">
+    <div>
+      <el-card class="box-card"  shadow="hover">
+        <div class="incard">
+          <div style="display: flex;flex-direction: row">
+            <el-input v-model="data.formData.name" placeholder="请输入" clearable />
+            <el-button style="margin-left: 10px" :icon="'Search'" circle type="primary" @click="getTableData"/>
+          </div>
+        </div>
+      </el-card>
+      <div class="main">
+        <el-table :data="data.tableData"  style="width: 100%;height:100%;margin-top: 20px" border stripe size="large">
+          <el-table-column prop="stu_name" label="姓名" width="100" />
+          <el-table-column label="性别" width="100">
+            <template #default="scope">
+              <span>{{scope.row.stu_sex==1?'男':'女'}}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="科目" width="100">
+            <template #default="scope">
+              <span>{{scope.row.subject==1?'普通理科':'普通文科'}}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="操作" >
+            <template #default="scope">
+              <el-upload
+                  ref="upload"
+                  class="upload-demo"
+                  action="#"
+                  :auto-upload="false"
+                  :on-change="bandImage"
+              >
+<!--                跳出选择文件-->
+              <el-button size="small" type="primary" @click="getStuMes(scope.row)">绑定学生</el-button>
+              </el-upload>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <div>
+      </div>
+      <div class="pagination">
+        <el-pagination
+            background layout="prev, pager, next"
+            :total="data.total"
+            v-model:current-page="data.formData.page"
+            v-model:page-size="data.formData.pageSize"
+            @current-change="handleCurrentChange"
+        />
+      </div>
+    </div>
+  </el-drawer>
 </template>
 
 <script lang="ts" setup>
 import {useRoute} from "vue-router";
 import {clearMit, getMajor} from "@/api/MIT";
-import {onBeforeUnmount, reactive} from "vue";
+import {onBeforeUnmount, reactive, ref} from "vue";
+import type { UploadInstance } from 'element-plus'
 //引入截图相关组件
 import html2canvas from "html2canvas"
 let $route = useRoute()
@@ -23,6 +78,9 @@ getData()
 let Answer:any = []
 //图表渲染
 import * as echarts from 'echarts';
+import {getStudent, updataStudent} from "@/api/student";
+import {uploadFile} from "@/api/file/file";
+import {ElMessage} from "element-plus";
 type EChartsOption = echarts.EChartsOption;
 
 const onChange = ()=>{
@@ -89,6 +147,8 @@ const generateImg = ()=>{
   });
 
   //下载后选择绑定的学生
+  drawer.value=true
+  getTableData()
 };
 // 下载图片方法
 const fileDownload = (downloadUrl:string) => {
@@ -111,6 +171,65 @@ const dataURIToBlob = (dataURI:string) => {
   }
   return new Blob([arr]);
 };
+
+//侧拉
+let drawer = ref(false)
+const data = reactive({
+  drawer:false,
+  total:0,
+  formData:{
+    name:'',
+    page:1,
+    pageSize:10,
+    userId:Number(localStorage.getItem('userId')),
+  },
+  tableData:[],
+})
+//查询
+const getTableData = ()=>{
+  getStudent(data.formData).then(res=>{
+    data.tableData=res.data.data
+    data.total=res.data.total
+  })
+}
+//分页
+const handleCurrentChange = (value:number)=>{
+  data.formData.page = value;
+  getTableData()
+}
+//绑定图片
+const uploadRef = ref<UploadInstance>()
+const bandImage = async(res,file)=>{
+  const files = file[0].raw;
+  const formData = new FormData();
+  formData.append('pic', files);
+  let strCode = ''
+  //上传文件
+  uploadFile(formData).then(res=>{
+    //接受file然后调用接口
+    StuMess.value.pic_major=res.data.data
+    //更新学生
+    updataStudent(StuMess.value).then(res=>{
+      ElMessage.success('绑定成功')
+      drawer.value=false
+    })
+  })
+
+
+}
+const submit = ()=>{
+  uploadRef.value!.submit()
+}
+//上方绑定学生按钮
+const bandStu = ()=>{
+  getTableData()
+  drawer.value = true
+}
+//绑定学生点击后获取当前学生信息存储
+let StuMess = ref({})
+const getStuMes = (row)=>{
+  StuMess.value = row
+}
 </script>
 
 <style scoped>
