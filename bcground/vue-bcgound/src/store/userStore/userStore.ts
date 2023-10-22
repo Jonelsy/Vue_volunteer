@@ -39,8 +39,8 @@ let userUserStore = defineStore('User',{
             }
         },
         //获取用户信息函数
-        async userinfos(){
-            return  await userinfo()
+        async userinfos(userId:number){
+            return  await userinfo(userId)
         },
     },
     //计算属性

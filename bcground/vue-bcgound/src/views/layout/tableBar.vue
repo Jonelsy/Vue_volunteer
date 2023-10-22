@@ -14,7 +14,7 @@
     <el-button :icon="'Refresh'" circle @click="updataReflsh" />
     <el-button :icon="'FullScreen'" circle @click="fullScorll"/>
     <el-button :icon="'Setting'" circle />
-    <img style="border-radius: 50%" :src="userStore.users.header">
+    <img style="border-radius: 50%" :src="imgUrl">
     <el-dropdown trigger="click" style="cursor: pointer;">
     <span class="el-dropdown-link">
       {{ userStore.users.nickname }}
@@ -35,7 +35,7 @@
 
 <script lang="ts" setup>
 //定义是否折叠
-import {reactive, ref} from "vue";
+import {onMounted, reactive, ref, watch} from "vue";
 import uselayoutStore from "@/store/tableBar/index"
 import {useRoute,useRouter} from "vue-router"
 import userUserStore from "@/store/userStore/userStore";
@@ -44,7 +44,16 @@ let useStore = uselayoutStore()
 let userStore = userUserStore()
 let $router = useRoute()
 let $route = useRouter()
-
+let imgUrl = ref('')
+//获取个人头像
+const getusers = async()=>{
+  let res = await import ('../../../../../Api_service/api_service/uploads/'+userStore.users.header)
+  imgUrl.value = res.default
+}
+getusers()
+watch(()=>userStore.users.header,()=>{
+  getusers()
+})
 const changeicon = ()=>{
   useStore.font = !useStore.font
 }

@@ -37,14 +37,16 @@ watch(()=>useStore.refash,()=>{
   })
 })
 
-onMounted(()=>{
+const setupUser = ()=>{
   //定义自动获取用户信息
-  useruserstore.userinfos().then(res=>{
+  useruserstore.userinfos(Number(localStorage.getItem('userId'))).then(res=>{
     useruserstore.users = res.data
+    useruserstore.users.header = res.data.header
     localStorage.removeItem('userId')
-    localStorage.setItem('userId', res.data.userid)
+    localStorage.setItem('userId', res.data.id)
   })
-})
+}
+setupUser()
 </script>
 
 <style scoped lang="scss">

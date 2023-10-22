@@ -13,8 +13,12 @@ export const reqRegin = (data:reqReginType)=>{
     return request.post<any,reqReginresPonse>('/user/regist',data)
 }
 
-export const userinfo = ()=>{
-    return request.get('/user/getUserMsg')
+export const userinfo = (userId:number)=>{
+    return request.get('/user/getUserMsg',{
+        params: {
+            userId
+        }
+    })
 }
 
 export const getUser = (data:getUserType)=>{

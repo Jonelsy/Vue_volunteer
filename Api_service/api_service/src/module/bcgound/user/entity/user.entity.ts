@@ -26,6 +26,6 @@ export class User{
 	email:string
 	
 	@ApiProperty()
-	@Column({ default: 'https://img1.baidu.com/it/u=2275056982,1506045372&fm=253&fmt=auto&app=138&f=JPEG?w=510&h=300'})
+	@Column({ default: 'null.png'})
 	header?:string
 }

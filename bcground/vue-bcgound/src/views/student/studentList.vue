@@ -84,11 +84,11 @@ interface TableDataItem {
   // 其他属性...
 }
 const getTableData = async ()=>{
-  if (user.users.userid===undefined){
+  if (user.users.id===undefined){
     await sleep(1000);
     await getTableData()
   }
-  data.formData.userId=user.users.userid
+  data.formData.userId=user.users.id
   getStudent(data.formData).then(res=>{
     data.tableData=res.data.data
     data.total=res.data.total

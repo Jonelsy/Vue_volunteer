@@ -93,15 +93,17 @@ export class UserController {
 	async getUser(@Query() query:{page:number,pageSize:number,name?:string} ){
 		return await this.UserService.getUser(query)
 	}
-	
+
 	
 	@Get('getUserMsg')
 	//swagger使用请求头
-	@ApiOperation({summary:'获取用户个人信息'}) 
+	@ApiOperation({summary:'获取用户个人信息'})
+	@ApiConsumes('application/x-www-form-urlencoded')
 	@UseGuards(AuthGuard('jwt'))
 	@ApiBearerAuth('jwt')
-	async getUserMes(@Headers('authorization') authorization: string){
-		return await this.UserService.getUserMsg(authorization)
+	@ApiQuery({ name: 'ID', description: '用户id', required: true, type: Number,example:1 })
+	async getUserMes(@Query() query:{userId:number}){
+		return await this.UserService.getUserMsg(query.userId)
 	}
 	
 	

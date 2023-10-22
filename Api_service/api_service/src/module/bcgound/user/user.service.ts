@@ -57,7 +57,12 @@ export class UserService {
 	}
 	//校验用户是否存在
 	async existingUser(user:User):Promise<any>{
-		return await this.user.findOne({where:{ username: user.username }});
+		if(user.username){
+			return await this.user.findOne({where:{ username: user.username }});
+		}else{
+			return null
+		}
+
 	}
 	//删除用户
 	async deleteUser(id:number){
@@ -77,7 +82,7 @@ export class UserService {
 			if(res!==null){
 				return{code:1,mes:'用户名已存在，请更换后重试'}
 			}else{
-				await this.user.update(params.id,params)
+				await this.user.update(Number(params.id),params)
 				return{code:0,mes:'修改成功'}
 			}
 		})
@@ -106,7 +111,7 @@ export class UserService {
 		     }
 	}
 	//根据touken获取用户个人信息
-	async getUserMsg(authorization:string){
-		return await this.jwtService.openvalidate(authorization)
+	async getUserMsg(userId:number){
+		return await this.user.findOne({where:{ id: userId }});
 	}
 }

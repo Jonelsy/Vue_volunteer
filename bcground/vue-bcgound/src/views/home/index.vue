@@ -3,7 +3,7 @@
   <el-card class="box-card" shadow="hover">
     <template #header>
       <div class="card-header">
-        <img alt="" :src="useStore.users.header" />
+        <img :src="imgUrl" alt="">
         <h1>Hi,{{useStore.users.nickname}}</h1>
       </div>
     </template>
@@ -110,10 +110,19 @@
 <script lang="ts" setup>
 import userUserStore from  '@/store/userStore/userStore'
 import * as echarts from 'echarts';
-import {onBeforeUnmount, onMounted, reactive, ref} from "vue";
+import {onBeforeUnmount, watch, reactive, ref} from "vue";
 import {getHomeItem} from "@/api/Home";
 let useStore = userUserStore()
-
+let imgUrl = ref('')
+//获取个人头像
+const getusers = async()=>{
+  let res = await import ('../../../../../Api_service/api_service/uploads/'+useStore.users.header)
+  imgUrl.value = res.default
+}
+getusers()
+watch(()=>useStore.users.header,()=>{
+  getusers()
+})
 //获取首页数据
 const datas = reactive({
   studentTotal:0,

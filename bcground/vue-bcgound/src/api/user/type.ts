@@ -47,8 +47,9 @@ export interface insertUserType{
 
 //定义修改
 export interface updateUserType{
-    username:string,
+    username?:string,
     nickname:string
     email:string,
-    id:number
+    id:number | null,
+    header?:string
 }
