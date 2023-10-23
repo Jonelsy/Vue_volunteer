@@ -50,7 +50,6 @@ const getusers = async()=>{
   let res = await import ('../../../../../Api_service/api_service/uploads/'+userStore.users.header)
   imgUrl.value = res.default
 }
-getusers()
 watch(()=>userStore.users.header,()=>{
   getusers()
 })

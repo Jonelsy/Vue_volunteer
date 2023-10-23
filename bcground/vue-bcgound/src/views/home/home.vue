@@ -7,12 +7,14 @@
     <tableBar></tableBar>
   </div>
   <div class="layout_main" :class="{fold:useStore.font?true:false}">
+    <keep-alive>
+      <router-view v-slot="{ Component }">
+        <transition name="fade">
+          <component :is="Component" v-if="flag" />
+        </transition>
+      </router-view>
+    </keep-alive>
 
-    <router-view v-slot="{ Component }">
-      <transition name="fade">
-        <component :is="Component" v-if="flag" />
-      </transition>
-    </router-view>
 
   </div>
 </div>

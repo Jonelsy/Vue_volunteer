@@ -110,7 +110,7 @@
 <script lang="ts" setup>
 import userUserStore from  '@/store/userStore/userStore'
 import * as echarts from 'echarts';
-import {onBeforeUnmount, watch, reactive, ref} from "vue";
+import {onBeforeUnmount, watch, reactive, ref, onMounted} from "vue";
 import {getHomeItem} from "@/api/Home";
 let useStore = userUserStore()
 let imgUrl = ref('')
@@ -119,8 +119,11 @@ const getusers = async()=>{
   let res = await import ('../../../../../Api_service/api_service/uploads/'+useStore.users.header)
   imgUrl.value = res.default
 }
-getusers()
+
 watch(()=>useStore.users.header,()=>{
+  getusers()
+})
+onMounted(()=>{
   getusers()
 })
 //获取首页数据
