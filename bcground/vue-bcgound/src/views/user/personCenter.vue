@@ -9,7 +9,7 @@
               :show-file-list="false"
               :before-upload="beforeAvatarUpload">
             <div class="demo-type">
-              <el-image style="width: 200px; height: 200px"
+              <el-image style="width: 100%;height:100%;border-radius: 50%"
                         :src="imgUrl"
               />
             </div>
@@ -187,7 +187,10 @@ const beforeAvatarUpload = (file:any)=>{
   align-items: center;
 }
 .demo-type{
-  transition-duration: 0.5s
+  transition-duration: 0.5s;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
 }
 .demo-type:hover{
   -webkit-box-shadow: #ccc 10px 10px 10px;
