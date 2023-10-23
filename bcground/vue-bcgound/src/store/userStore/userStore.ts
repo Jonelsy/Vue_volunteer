@@ -4,13 +4,15 @@ import type {reqLoginType, reqReginType} from "@/api/user/type";
 //引入api
 import {reqLogin, reqRegin, userinfo} from "@/api/user/index"
 import request from "@/axios/index"
+//引入接口类型
+import {userStoreType} from '@/store/userStore/type'
 let userUserStore = defineStore('User',{
     //保存数据
-    state:()=>{
+    state:():userStoreType=>{
         return{
             token:localStorage.getItem('token'),
             users:{
-                userid:0,
+                id:0,
             }
         }
     },

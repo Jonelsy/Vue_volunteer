@@ -59,7 +59,7 @@ import {updataStudent} from "@/api/student";
 import {updateUser} from "@/api/user";
 
 let useUser = userUserStore()
-const data = reactive({
+const data = reactive<dataType>({
   ruleForm:{
     name:'',
     email:'',
@@ -68,6 +68,15 @@ const data = reactive({
     id:null,
   },
 })
+interface dataType{
+  ruleForm: {
+    name?: string,
+    email?: string,
+    header?: string,
+    username?: string,
+    id?: null | number,
+  }
+}
 //表单检验规则
 const rules = {
   name: [
@@ -95,12 +104,27 @@ watch(()=>useUser.users.header,()=>{
 //修改用户信息
 let ruleForm = ref()
 const submitForm = ()=>{
-  ruleForm.value.validate().then(res=>{
+  ruleForm.value.validate().then(()=>{
+    //更新用户
+    let params:any = {
+      nickname:data.ruleForm.name,
+      email:data.ruleForm.email,
+      id:data.ruleForm.id,
+      header:data.ruleForm.header
+    }
+    updateUser(params).then(res=>{
+      ElMessage.success(res.data.mes)
+      //调用仓库获取个人信息
+      useUser.userinfos(Number(data.ruleForm.id)).then((res)=>{
+        useUser.users = res.data
+        getusers()
+      })
 
+    })
   })
 }
 //上传头像
-const beforeAvatarUpload = (file)=>{
+const beforeAvatarUpload = (file:any)=>{
   const formData = new FormData();
   formData.append('pic', file);
   //上传文件
@@ -108,7 +132,7 @@ const beforeAvatarUpload = (file)=>{
     //接受file然后调用接口
     let headerUrl = res.data.data
     //更新用户
-    let params = {
+    let params:any = {
       nickname:data.ruleForm.name,
       email:data.ruleForm.email,
       id:data.ruleForm.id,
