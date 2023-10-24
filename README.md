@@ -106,7 +106,7 @@ ranking：排名
 127.0.0.1:3030/swagger
 ```
 
-![swagger](D:\project\高考志愿填报辅助系统\Untitled\swagger.png)
+![swagger](./Untitled/swagger.png)
 
 ### scr文件为开发文件夹
 
