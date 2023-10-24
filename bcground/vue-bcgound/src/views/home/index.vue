@@ -111,7 +111,7 @@
 import userUserStore from  '@/store/userStore/userStore'
 import * as echarts from 'echarts';
 import {onBeforeUnmount, watch, reactive, ref, onMounted} from "vue";
-import {getHomeItem} from "@/api/Home";
+import {getAllSchool, getHomeItem} from "@/api/Home";
 let useStore = userUserStore()
 let imgUrl = ref('')
 //获取个人头像
@@ -132,8 +132,13 @@ const datas = reactive({
   optionTotal:0,
 })
 let optionSchhol=[]
+//右侧图配置
+//右侧柱状图配置
+let dataAxis:any = [];
+let data:any = [];
+let yMax = 300;
+let dataShadow = [];
 const getIndexItem = ()=>{
-
     getHomeItem(Number(localStorage.getItem('userId'))).then(res=>{
       datas.studentTotal=res.data.data.StudentsTotal
       datas.optionTotal = res.data.data.OptionsTotal
@@ -144,10 +149,19 @@ const getIndexItem = ()=>{
       //给图标赋值后挂载
       option.series[0].data = optionSchhol
       initEchars()
-      initR_Echars()
+      //获取柱状图数据
+      getAllSchool().then(res=>{
+        //给图标赋值后挂载
+        dataAxis = res.data.numArr
+        data = res.data.schoolArr
+        for (let i = 0; i < data.length; i++) {
+          dataShadow.push(yMax);
+        }
+        R_option.xAxis.data = data
+        R_option.series[0].data = dataAxis
+        initR_Echars()
+      })
     })
-
-
 }
 getIndexItem()
 //图饼配置
@@ -217,21 +231,14 @@ const initEchars = ()=>{
   let chartDom = echarts.init(document.getElementById('Echars')!);
   option && chartDom.setOption(option);
 }
-  //右侧柱状图配置
-  let dataAxis = ['计算机科学与技术', '机械制造及其自动化', '软件工程', '网络工程', '会计', '汉语言文学', '临床医学', '电子商务', '动物科学', '动物医学', '统计学', '小学教育', '铁路交通', '轨道交通', '给排水', '电气及其自动化', '数学', '物流管理', '酒店管理', '其他'];
-  let data = [22420, 12832, 19531, 23344, 29053, 13330, 2310, 6123, 2442, 3221, 903, 1249, 2130, 1122, 1323, 3334, 1928, 1223, 1125, 2203];
-  let yMax = 500;
-  let dataShadow = [];
-  for (let i = 0; i < data.length; i++) {
-    dataShadow.push(yMax);
-  }
+//右侧图表配置
 const R_option:any = reactive({
     title: {
       text: '近年份各专业报考热度比例',
       subtext: 'In recent years, the proportion of the popularity of each major'
     },
     xAxis: {
-      data: dataAxis,
+      data: [],
       axisLabel: {
         inside: true,
         color: '#000000'
@@ -280,7 +287,7 @@ const R_option:any = reactive({
             ])
           }
         },
-        data: data
+        data: []
       }
     ]
 })
@@ -289,7 +296,6 @@ const initR_Echars = ()=>{
   R_option && chartRightDom.setOption(R_option);
   const zoomSize = 6;
   chartRightDom.on('click', function (params) {
-
     chartRightDom.dispatchAction({
       type: 'dataZoom',
       startValue: dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],

@@ -22,5 +22,15 @@ export class SchoolController {
 	async getOption(@Query() query:{page:number,pageSize:number,name?:string,subject:number,level:number,ranking?:number} ){
 		return await this.SchoolService.getSchool(query)
 	}
-	
+
+
+	@Get('getAllSchool')
+	//swagger使用请求头
+	@UseGuards(AuthGuard('jwt'))
+	@ApiBearerAuth('jwt')
+	@ApiOperation({summary:'统计一本专业'})
+	@ApiConsumes('application/x-www-form-urlencoded')
+	async getAllSchool(){
+		return await this.SchoolService.getAllSchool()
+	}
 }

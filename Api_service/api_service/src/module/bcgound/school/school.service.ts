@@ -2,8 +2,17 @@ import { Injectable } from '@nestjs/common';
 //对数据库进行增删改查需引入如下
 import {Repository,Like,LessThan, MoreThan, Between} from 'typeorm'
 import {InjectRepository} from '@nestjs/typeorm'
-import {liberal_school_one_school,liberal_school_one_subject,liberal_school_two_school,liberal_school_two_subject,
-math_school_one_school,math_school_one_subject,math_school_two_school,math_school_two_subject} from './entity/school.entity'
+import {
+	liberal_school_one_school,
+	liberal_school_one_subject,
+	liberal_school_two_school,
+	liberal_school_two_subject,
+	math_school_one_school,
+	math_school_one_subject,
+	math_school_two_school,
+	math_school_two_subject,
+	school_one
+} from './entity/school.entity'
 
 @Injectable()
 export class SchoolService {
@@ -15,7 +24,8 @@ export class SchoolService {
 		@InjectRepository(math_school_one_school) private readonly math_school_one_school:Repository<math_school_one_school>,
 		@InjectRepository(math_school_one_subject) private readonly math_school_one_subject:Repository<math_school_one_subject>,
 		@InjectRepository(math_school_two_school) private readonly math_school_two_school:Repository<math_school_two_school>,
-		@InjectRepository(math_school_two_subject) private readonly math_school_two_subject:Repository<math_school_two_subject>,){}
+		@InjectRepository(math_school_two_subject) private readonly math_school_two_subject:Repository<math_school_two_subject>,
+		@InjectRepository(school_one) private readonly school_one:Repository<school_one>,){}
 	//获取列表
 	
 	async getSchool(query:{page:number,pageSize:number,name?:string,subject?:number,level:number,ranking?:number}){
@@ -105,5 +115,26 @@ export class SchoolService {
 				}
 			}
 		}	
+	}
+	//获取一本专业统计
+	async getAllSchool(){
+		const majorNamesCount = await this.school_one
+			.createQueryBuilder('school_one')
+			.select('school_one.MajorName, COUNT(school_one.MajorName)', 'count')
+			.groupBy('school_one.MajorName')
+			.orderBy('count', 'DESC')
+			.limit(20)
+			.getRawMany();
+		let schoolArr = []
+		let numArr = []
+		majorNamesCount.forEach(item=>{
+			schoolArr.push(item.MajorName)
+			numArr.push(item.count)
+		})
+		let data={
+			schoolArr,
+			numArr
+		}
+		return data
 	}
 }

@@ -491,3 +491,105 @@ export class math_school_two_subject{
 	ranking:string
 
 }
+
+//一本所有学校,用于统计专业设置
+@Entity({ name: 'school_one' })
+export class school_one{
+
+	@ApiProperty()
+	@PrimaryGeneratedColumn()
+	id:number
+
+	@ApiProperty()
+	@Column()
+	PreferenceOrder:string
+
+
+	@ApiProperty()
+	@Column()
+	CategoryName:string
+
+	@ApiProperty()
+	@Column()
+	AdmissionPlanCount:string
+
+	@ApiProperty()
+	@Column()
+	CollegeName:string
+
+	@ApiProperty()
+	@Column()
+	CollegeCode:string
+
+	@ApiProperty()
+	@Column()
+	AdmissionRatio:string
+
+	@ApiProperty()
+	@Column()
+	LowestScoreAdmissionRatio:string
+
+	@ApiProperty()
+	@Column()
+	LowestAdmissionScore:string
+
+	@ApiProperty()
+	@Column()
+	ExpectedApplicantsCount:string
+
+	@ApiProperty()
+	@Column()
+	RegisteredApplicantsCount:string
+
+	@ApiProperty()
+	@Column()
+	ShortfallCount:string
+
+	@ApiProperty()
+	@Column()
+	AdmissionRegulationsURL:string
+
+	@ApiProperty()
+	@Column()
+	MajorCode:string
+
+	@ApiProperty()
+	@Column()
+	MajorName:string
+
+	@ApiProperty()
+	@Column()
+	PlanNature:string
+
+	@ApiProperty()
+	@Column()
+	PlannedEnrollmentCount:string
+
+	@ApiProperty()
+	@Column()
+	MajorLowestAdmissionScore:string
+
+	@ApiProperty()
+	@Column()
+	MajorRegisteredApplicantsCount:string
+
+	@ApiProperty()
+	@Column()
+	DurationOfStudy:string
+
+	@ApiProperty()
+	@Column()
+	TuitionFee:string
+
+	@ApiProperty()
+	@Column()
+	LocationOfSchool:string
+
+	@ApiProperty()
+	@Column()
+	MajorNotes:string
+
+	@ApiProperty()
+	@Column()
+	CollegePath:string
+}

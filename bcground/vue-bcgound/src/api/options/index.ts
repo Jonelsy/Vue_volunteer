@@ -58,3 +58,12 @@ export const delOwnerOptions = (data:number)=>{
         }
     })
 }
+//下载方案
+export const downloadOption = (option_id:number)=>{
+    return request.get('/excel/export',{
+        params: {
+            option_id
+        },
+        responseType: 'blob'
+    })
+}

@@ -9,7 +9,7 @@
               <el-button style="margin-left: 10px" :icon="'Search'" circle type="primary" @click="getSchool"/>
             </div>
             <div>
-              <el-button :icon="'Download'" type="primary" @click="getSchool">下载方案</el-button>
+              <el-button :icon="'Download'" type="primary" @click="getOwnFunc">下载方案</el-button>
             </div>
           </div>
         </el-card>
@@ -105,6 +105,7 @@
 import {reactive} from "vue";
 import {getOwnItems} from "@/api/school";
 import {useRoute} from "vue-router";
+import {downloadOption} from "@/api/options";
 let $route = useRoute()
 
 let data = reactive({
@@ -132,6 +133,19 @@ getSchool()
 const handleCurrentChange = (value:number)=>{
   data.ruleForm.page = value;
   getSchool()
+}
+//下载方案
+const getOwnFunc = ()=>{
+  downloadOption(data.ruleForm.option_id).then(res=>{
+    const url = window.URL.createObjectURL(new Blob([res.data]));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'file.xlsx');
+    link.click();
+    window.URL.revokeObjectURL(url);
+  }) .catch(error => {
+    console.error(error);
+  });
 }
 </script>
 

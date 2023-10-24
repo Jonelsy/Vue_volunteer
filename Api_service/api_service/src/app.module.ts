@@ -11,6 +11,7 @@ import { OptionsModule } from './module/bcgound/options/options.module';
 import { SchoolModule } from './module/bcgound/school/school.module';
 import { MitModule } from './module/bcgound/mit/mit.module';
 import { FileModule } from './module/bcgound/file/file.module';
+import { ExcelModule } from './module/bcgound/excel/excel.module';
 
 
 
@@ -22,7 +23,7 @@ import { FileModule } from './module/bcgound/file/file.module';
 // }
 
 @Module({
-  imports: [DbModule, UserModule, StudentModule, OptionsModule, SchoolModule, MitModule, FileModule],
+  imports: [DbModule, UserModule, StudentModule, OptionsModule, SchoolModule, MitModule, FileModule, ExcelModule],
   controllers: [AppController],
   providers: [AppService],
 })

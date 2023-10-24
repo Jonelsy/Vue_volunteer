@@ -8,3 +8,6 @@ export const getHomeItem = (user_id:number)=>{
         }
     })
 }
+export const getAllSchool = ()=>{
+    return request.get('/school/getAllSchool')
+}
