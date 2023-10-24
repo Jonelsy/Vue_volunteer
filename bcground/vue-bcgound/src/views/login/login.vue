@@ -156,6 +156,7 @@ body #login{
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #E5EEFDFF;
 }
 .card{
   width: 50vh;
@@ -165,7 +166,7 @@ body #login{
   align-items: center;
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
-  background-color: rgba(228 ,228 ,228 ,0.10);
+  background-color: #ffffff;
   transition: all 0.35s;
   overflow-y: auto;
   .card-title{
