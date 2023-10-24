@@ -192,7 +192,7 @@ style:公共样式配置
 
 ![selectoption](./Untitled/selectoption.png)
 
-进入选择界面，此界面高效自定义Element plus表格组件，实现单机后方填入表格变色，单机学校填入自动全选专业，点击专业填入自动获取学校
+进入选择界面，此界面高效自定义Element plus表格组件，实现单机后方填入表格变色，单机学校填入自动全选专业，点击专业填入自动获取学校，左下角按钮为同步按钮，记得点，不然刷新后数据丢失
 
 ![school](./Untitled/school.png)
 
@@ -216,7 +216,7 @@ style:公共样式配置
 
 答题完成后返回人格类型，适合专业等
 
-![mitPlain](./Untitled/Untitled/mitPlain.png)
+![mitPlain](./Untitled/mitPlain.png)
 
 点击左上方一件截图可以直接下载当前组件图片，然后可以选择绑定学生，即可绑定到学生列表后方
 
