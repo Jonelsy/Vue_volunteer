@@ -154,73 +154,73 @@ style:公共样式配置
 
 登陆界面
 
-![login](D:\project\高考志愿填报辅助系统\Untitled\login.png)
+![login](./Untitled/login.png)
 
 需要进行滑动验证
 
-![yanzheng](D:\project\高考志愿填报辅助系统\Untitled\yanzheng.png)
+![yanzheng](./Untitled/yanzheng.png)
 
 进入首页，首页数据均从数据库统计获取
 
-![home](D:\project\高考志愿填报辅助系统\Untitled\home.png)
+![home](./Untitled/home.png)
 
 管理员查看，可以对用户进行增删改查
 
-![user](D:\project\高考志愿填报辅助系统\Untitled\user.png)
+![user](./Untitled/user.png)
 
 我的学生，只能查看自己ID下的学生信息
 
-![stu](D:\project\高考志愿填报辅助系统\Untitled\stu.png)
+![stu](./Untitled/stu.png)
 
 点击学生查看当前学生对应方案
 
-![option](D:\project\高考志愿填报辅助系统\Untitled\option.png)
+![option](./Untitled/option.png)
 
 点击方案查看方案中具体学校，右上角可以下载方案（Excel结构未处理，不美观）
 
-![options](D:\project\高考志愿填报辅助系统\Untitled\options.png)
+![options](./Untitled/options.png)
 
 点击一对一填报,可查看学生对应性格测试（后面会讲），以及相关信息
 
-![oneByone](D:\project\高考志愿填报辅助系统\Untitled\oneByone.png)
+![oneByone](./Untitled/oneByone.png)
 
 可以对学生进行增删改查，输入成绩后自动获取等效排名
 
-![insertStu](D:\project\高考志愿填报辅助系统\Untitled\insertStu.png)
+![insertStu](./Untitled/insertStu.png)
 
 点击某个方案进行添加院校
 
-![selectoption](D:\project\高考志愿填报辅助系统\Untitled\selectoption.png)
+![selectoption](./Untitled/selectoption.png)
 
 进入选择界面，此界面高效自定义Element plus表格组件，实现单机后方填入表格变色，单机学校填入自动全选专业，点击专业填入自动获取学校
 
-![school](D:\project\高考志愿填报辅助系统\Untitled\school.png)
+![school](./Untitled/school.png)
 
 并设置自定义推荐功能，设置 冲！稳！保！三个方面，通过排名百分比推荐
 
 并可上方设置关闭自定义推荐，无法切换文科理科，但是可以切换一本二本，注意，切换一本二本会清空所有历史数据
 
-![gexinghua](D:\project\高考志愿填报辅助系统\Untitled\gexinghua.png)
+![gexinghua](./Untitled/gexinghua.png)
 
 接下来是院校查看，可随意查看院校信息（后方包含院校招生简章）
 
-![selectSchools](D:\project\高考志愿填报辅助系统\Untitled\selectSchools.png)
+![selectSchools](./Untitled/selectSchools.png)
 
 最后是性格测试
 
-![mitHome](D:\project\高考志愿填报辅助系统\Untitled\mitHome.png)
+![mitHome](./Untitled/mitHome.png)
 
 点击开始测试答题，目前只导入12题，后续根据word文档自定义导入即可
 
-![answermit](D:\project\高考志愿填报辅助系统\Untitled\answermit.png)
+![answermit](./Untitled/answermit.png)
 
 答题完成后返回人格类型，适合专业等
 
-![mitPlain](D:\project\高考志愿填报辅助系统\Untitled\mitPlain.png)
+![mitPlain](./Untitled/Untitled/mitPlain.png)
 
 点击左上方一件截图可以直接下载当前组件图片，然后可以选择绑定学生，即可绑定到学生列表后方
 
-![bandStu](D:\project\高考志愿填报辅助系统\Untitled\bandStu.png)
+![bandStu](./Untitled/bandStu.png)
 
 以上为所有功能，如有补充请联系作者
 
