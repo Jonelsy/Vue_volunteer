@@ -26,6 +26,6 @@ export class User{
 	email:string
 	
 	@ApiProperty()
-	@Column({ default: 'null.png'})
+	@Column()
 	header?:string
 }

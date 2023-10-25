@@ -29,8 +29,15 @@
         <el-table-column label="性格测试" width="200">
           <template #default="scope">
             <el-image style="width: 160px; height: 90px"
+                      v-if="scope.row.pic_major!==null"
                       :src="require('../../../../../Api_service/api_service/uploads/'+scope.row.pic_major)"
                       :preview-src-list="[require('../../../../../Api_service/api_service/uploads/'+scope.row.pic_major)]"
+                      preview-teleported="true"
+            />
+            <el-image style="width: 160px; height: 90px"
+                      v-else
+                      :src="require('../../../../../Api_service/api_service/uploads/null.png')"
+                      :preview-src-list="[require('../../../../../Api_service/api_service/uploads/null.png')]"
                       preview-teleported="true"
             />
           </template>

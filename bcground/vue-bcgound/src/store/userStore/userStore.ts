@@ -20,10 +20,13 @@ let userUserStore = defineStore('User',{
     actions:{
         async loginSub(data:reqLoginType){
             localStorage.removeItem('token')
+            localStorage.removeItem('userId')
             //调用api中方法
            let result = await reqLogin(data)
             if (Number(result.data.code)===0){
                 let token = result.data.data.token
+                let id = result.data.data.userID
+                localStorage.setItem('userId',id)
                 localStorage.setItem('token',token)
                 request.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                 return Promise.resolve(result.data.mes)

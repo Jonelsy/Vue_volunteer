@@ -53,6 +53,9 @@ const getusers = async()=>{
 watch(()=>userStore.users.header,()=>{
   getusers()
 })
+onMounted(()=>{
+  getusers()
+})
 const changeicon = ()=>{
   useStore.font = !useStore.font
 }
@@ -63,6 +66,7 @@ const updataReflsh = ()=>{
 
 const logout=()=>{
   localStorage.removeItem('token')
+  localStorage.removeItem('userId')
   $route.push('/')
 }
 //全屏,js自带

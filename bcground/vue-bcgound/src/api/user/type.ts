@@ -10,7 +10,7 @@ export interface dataType{
 }
 export interface tokenType{
     token:string,
-    userid:number,
+    userID:number,
 }
 //定义登陆后返回数据类型
 export interface reqLoginresPonse{
