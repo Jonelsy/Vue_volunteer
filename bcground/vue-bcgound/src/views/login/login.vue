@@ -9,12 +9,12 @@
         <el-form-item label="密码" prop="password" >
           <el-input :prefix-icon="Lock" type="password" v-model="loginForm.password" show-password></el-input>
         </el-form-item>
-        <el-form-item label="身份" prop="resource">
-          <el-radio-group v-model="loginForm.type">
-            <el-radio label="管理员"></el-radio>
-            <el-radio label="用户"></el-radio>
-          </el-radio-group>
-        </el-form-item>
+<!--        <el-form-item label="身份" prop="resource">-->
+<!--          <el-radio-group v-model="loginForm.type">-->
+<!--            <el-radio label="管理员"></el-radio>-->
+<!--            <el-radio label="用户"></el-radio>-->
+<!--          </el-radio-group>-->
+<!--        </el-form-item>-->
         <el-form-item label="人机验证：" prop="verify">
           <el-button type="success" v-if="loginForm.verify==false" plain style="width: 100%;" @click="data.dialogTableVisible=true">点我进行人机验证</el-button>
           <el-button type="success" v-else plain style="width: 100%;" :icon="'Check'" />

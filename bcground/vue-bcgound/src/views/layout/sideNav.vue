@@ -20,7 +20,7 @@
         <el-icon><House/></el-icon>
         <template #title><span>首页</span></template>
       </el-menu-item>
-      <el-menu-item index="/user">
+      <el-menu-item index="/user" v-if="shows">
         <el-icon><User/></el-icon>
         <template #title><span>用户管理</span></template>
       </el-menu-item>
@@ -48,7 +48,15 @@
 import {useRoute} from "vue-router";
 const route = useRoute()
 import uselayoutStore from "@/store/tableBar/index"
+import {ref} from "vue";
 let useStore = uselayoutStore()
+let userid = ref(Number(localStorage.getItem('userId')))
+let shows = false
+if (userid.value===3){
+  shows=true
+}
+console.log()
+
 </script>
 
 <style scoped lang="scss">

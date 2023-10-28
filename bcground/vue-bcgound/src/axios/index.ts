@@ -3,7 +3,7 @@ import {ElMessage} from 'element-plus'
 
 const request = axios.create({
     // 在这里可以配置基本的 baseURL、headers 等
-    baseURL: 'http://localhost:3030',
+    baseURL: 'http://127.0.0.1:3030',
     timeout: 5000,
     headers: {
         // 在这里可以设置其他的请求头
