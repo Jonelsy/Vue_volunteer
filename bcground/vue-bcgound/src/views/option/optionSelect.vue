@@ -208,6 +208,8 @@ const handleSchoolClick = (row:MyObject) => {
   const index = state.selectedRow.findIndex((item)=>{
     return item.id === row.id;
   });
+  console.log(index);
+  
   //为-1不存在，添加进数组
   if (index === -1) {
     state.selectedRow.push(row);
@@ -226,7 +228,11 @@ const handleSchoolClick = (row:MyObject) => {
         const indexs = state.selectedRow.findIndex((selectedItem)=>{
           return selectedItem.id === item.id;
         });
-        state.selectedRow.splice(indexs, 1);
+        if(indexs===-1){
+          return
+        }else{
+          state.selectedRow.splice(indexs, 1);
+        }
       })
     }
   }
