@@ -122,8 +122,8 @@
         </el-table-column>
         <el-table-column label="院校章程" align="center" >
           <template #default="scope">
-            <el-link type="primary"  @click="console.log(scope.row)" v-if="scope.row.AdmissionRegulationsURL!=null">点击查看</el-link>
-            <p v-else @click="console.log(scope.row)">{{ scope.row.MajorNotes }}</p>
+            <el-link type="primary" v-if="scope.row.AdmissionRegulationsURL!=null">点击查看</el-link>
+            <p v-else>{{ scope.row.MajorNotes }}</p>
           </template>
         </el-table-column>
         <el-table-column label="操作" align="center" >
