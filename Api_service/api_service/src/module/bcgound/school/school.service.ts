@@ -34,9 +34,11 @@ export class SchoolService {
 		    skip: (query.page - 1) * query.pageSize,
 			order: {CollegeCode:'ASC' as any},
 		  };
+		//有名字无排名（非个性化推荐）
 		if (query.name) {
 		    queryOptions['where'] = { CollegeName: Like(`%${query.name}%`) };
 		  }
+		//有排名无名子（个性化推荐）
 		if (query.ranking) {
 		      queryOptions['where'] = { ranking: Between(query.ranking-500,query.ranking+2500)};
 		}

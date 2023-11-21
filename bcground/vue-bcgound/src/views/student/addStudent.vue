@@ -152,6 +152,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
             message: res.data.mes
           })
           stopCustomLoading(loading);
+          $router.go(-1)
         }).catch(res=>{
           ElMessage({
             type: 'error',

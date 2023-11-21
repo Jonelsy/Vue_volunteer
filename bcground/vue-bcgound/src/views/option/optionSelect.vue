@@ -95,7 +95,7 @@
               <div v-else-if="scope.row.LowestAdmissionScore==null&&scope.row.ranking>=data.userData.ranking+1000&&scope.row.ranking<data.userData.ranking+5000" style="display: flex;align-items: flex-end">
                 <el-tag>稳</el-tag>
               </div>
-              <div v-else-if="scope.row.LowestAdmissionScore==null&&scope.row.ranking>=data.userData.ranking+5000" style="display: flex;align-items: flex-end">
+              <div v-else-if="scope.row.LowestAdmissionScore==null&&scope.row.ranking>=data.userData.ranking+5000&&scope.row.ranking<=data.userData.ranking+8000" style="display: flex;align-items: flex-end">
                 <el-tag type="success">保</el-tag>
               </div>
               <div v-else>

@@ -43,7 +43,7 @@ export class StudentService {
 		}else{
 			data.ranking = null
 			await this.student.save(data)
-			return{code:0,mes:'添加成功，成绩过低，请核实'}
+			return{code:0,mes:'添加成功，成绩不合法，没有排名，请重新核实'}
 		}
 		
 	}
@@ -99,9 +99,14 @@ export class StudentService {
 				  }],
 			})
 		}
-		params.ranking = ranking[0].ranking
-		await this.student.update(params.id,params)
-		return{code:0,mes:'修改成功'}
+		//如果修改的成绩不合法
+		if(ranking.length===0){
+			return{code:1,mes:'成绩不合法,修改失败'}
+		}else{
+			params.ranking = ranking[0].ranking
+			await this.student.update(params.id,params)
+			return{code:0,mes:'修改成功'}
+		}
 	}
 
 	//获取学生总数，给optionsService使用
