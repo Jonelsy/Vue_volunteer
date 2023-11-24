@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Param, Post, UseGuards,Headers ,Query} from '@nestjs/common';
+import { Controller, Get, UseGuards ,Query} from '@nestjs/common';
 import { SchoolService } from './school.service';
-import {ApiOperation,ApiTags,ApiBody,ApiConsumes, ApiBearerAuth, ApiParam,ApiQuery} from '@nestjs/swagger'
+import {ApiOperation,ApiTags,ApiConsumes, ApiBearerAuth,ApiQuery} from '@nestjs/swagger'
 import { AuthGuard } from '@nestjs/passport';
 @Controller('school')
 @ApiTags('学校相关查看接口')
