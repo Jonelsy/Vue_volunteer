@@ -143,7 +143,7 @@ const getIndexItem = ()=>{
       datas.studentTotal=res.data.data.StudentsTotal
       datas.optionTotal = res.data.data.OptionsTotal
       optionSchhol = res.data.data.OptionsSchool
-      optionSchhol.forEach((item: { value: number; })=>{
+      optionSchhol.forEach(item=>{
         item.value = Number(item.value)
       })
       //给图标赋值后挂载
@@ -220,7 +220,7 @@ const option:any = reactive({
       animationType: 'scale',
       animationEasing: 'elasticOut',
 
-      animationDelay: function (idx: any) {
+      animationDelay: function (idx) {
         return Math.random() * 200;
       }
     }

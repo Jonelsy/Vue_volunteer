@@ -2,6 +2,9 @@
 <div class="layout_contain">
   <div class="layout_nav" :class="{fold:useStore.font?true:false}">
     <sideNav></sideNav>
+    <div class="footerRecord" :class="{fold:useStore.font?true:false}">
+      <el-link href="https://github.com/Jonelsy" :underline="false" target="_blank">Github:jonelsy&&何小雨</el-link>
+    </div>
   </div>
   <div class="layout_header" :class="{fold:useStore.font?true:false}">
     <tableBar></tableBar>
@@ -14,8 +17,6 @@
         </transition>
       </router-view>
     </keep-alive>
-
-
   </div>
 </div>
 </template>
@@ -106,5 +107,18 @@ setupUser()
   opacity: 0;
   transition: 0.5s;
   position: absolute;
+}
+.footerRecord{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 260px;
+  transition: all 0.5s;
+  opacity: 1;
+  &.fold{
+    opacity: 0;
+    width: 260px;
+    }
 }
 </style>
