@@ -64,6 +64,11 @@ import {useRoute} from "vue-router";
 import {clearMit, getMajor} from "@/api/MIT";
 import {onBeforeUnmount, reactive, ref} from "vue";
 import type { UploadInstance } from 'element-plus'
+//图表渲染
+import * as echarts from 'echarts';
+import {getStudent, updataStudent} from "@/api/student";
+import {uploadFile} from "@/api/file/file";
+import {ElMessage} from "element-plus";
 //引入截图相关组件
 import html2canvas from "html2canvas"
 let $route = useRoute()
@@ -76,11 +81,7 @@ const getData = () => {
 }
 getData()
 let Answer:any = []
-//图表渲染
-import * as echarts from 'echarts';
-import {getStudent, updataStudent} from "@/api/student";
-import {uploadFile} from "@/api/file/file";
-import {ElMessage} from "element-plus";
+
 type EChartsOption = echarts.EChartsOption;
 
 const onChange = ()=>{

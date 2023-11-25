@@ -55,16 +55,17 @@
 <script lang="ts" setup>
 import {User ,Lock} from "@element-plus/icons-vue"
 import {reactive, ref} from "vue";
-//引入pinia
-import useUserStore from "@/store/userStore/userStore"
-let userStore = useUserStore()
-//引入router
-import {useRouter} from "vue-router"
-let $router = useRouter()
 //引入element提示
 import {ElMessage} from "element-plus";
 //引入自定义时间监视
 import {getTime} from "@/views/utils/getTime"
+//引入pinia
+import useUserStore from "@/store/userStore/userStore"
+//引入router
+import {useRouter} from "vue-router"
+let $router = useRouter()
+let userStore = useUserStore()
+
 //收集账号密码
 let loginForm = reactive({
   username:'admin',
@@ -113,7 +114,7 @@ const loginSub = async()=>{
    loginForms.value.validate().then(() => {
       loading.value = true
     //调用仓库方法
-      userStore.loginSub(loginForm).then(res=>{
+      userStore.loginSub(loginForm).then((res: any)=>{
         loading.value = false
         let message = getTime()
         $router.push('/index')
@@ -122,7 +123,7 @@ const loginSub = async()=>{
           message: `Hi，${message}好，欢迎回来`
         })
         loading.value = false
-      }).catch(error=>{
+      }).catch((error: any)=>{
         ElMessage({
           type: 'error',
           message: error

@@ -32,14 +32,14 @@
 <script lang="ts" setup>
 import {User ,Lock,Message} from "@element-plus/icons-vue"
 import {reactive, ref} from "vue";
+//引入router
+import {useRouter} from "vue-router"
+//引入element提示
+import {ElMessage} from "element-plus";
 //引入pinia
 import useUserStore from "@/store/userStore/userStore"
 let userStore = useUserStore()
-//引入router
-import {useRouter} from "vue-router"
 let $router = useRouter()
-//引入element提示
-import {ElMessage} from "element-plus";
 //收集账号密码
 let loginForm = reactive({
   username:'',

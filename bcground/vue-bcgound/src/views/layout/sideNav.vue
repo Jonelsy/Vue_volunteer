@@ -45,10 +45,10 @@
 </template>
 
 <script  lang="ts" setup>
-import {useRoute} from "vue-router";
-const route = useRoute()
-import uselayoutStore from "@/store/tableBar/index"
 import {ref} from "vue";
+import {useRoute} from "vue-router";
+import uselayoutStore from "@/store/tableBar/index"
+const route = useRoute()
 let useStore = uselayoutStore()
 let userid = ref(Number(localStorage.getItem('userId')))
 let shows = false
