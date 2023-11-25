@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Param, Post, UseGuards,Headers ,Query} from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards ,Query} from '@nestjs/common';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { UserService } from './user.service'
 import {ApiOperation,ApiTags,ApiBody,ApiConsumes, ApiBearerAuth, ApiParam,ApiQuery} from '@nestjs/swagger'
 import { User } from './entity/user.entity';
@@ -55,7 +56,7 @@ export class UserController {
 	@ApiBearerAuth('jwt')
 	@ApiParam({ name: 'id', description: '用户ID' })
 	deleteUser(@Param('id') params:string):any{
-		let id:number = parseInt(params)
+		const id:number = parseInt(params)
 		return this.UserService.deleteUser(id)
 	}
 	

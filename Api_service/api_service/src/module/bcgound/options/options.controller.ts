@@ -1,5 +1,5 @@
 import { OptionsService } from './options.service'
-import {Body, Controller, Get, Param, Post, UseGuards, Headers, Query, Inject} from '@nestjs/common';
+import {Body, Controller, Get, Param, Post, UseGuards, Query, Inject} from '@nestjs/common';
 import {ApiOperation,ApiTags,ApiBody,ApiConsumes, ApiBearerAuth, ApiParam,ApiQuery} from '@nestjs/swagger'
 import { AuthGuard } from '@nestjs/passport';
 import {Option_school, Option_subject} from './entity/options.entity'
@@ -31,7 +31,7 @@ export class OptionsController {
 	@ApiBearerAuth('jwt')
 	@ApiParam({ name: 'id', description: '志愿ID' })
 	async deleteOption(@Param('id') params:string){
-		let id:number = parseInt(params)
+		const id:number = parseInt(params)
 		return await this.OptionsService.delOptions(id)
 	}
 	
@@ -137,13 +137,13 @@ export class OptionsController {
 	@ApiQuery({ name: 'user_id', description: '用户id', required: true, type: Number,example:'1' })
 	async getHome(@Query() query:{user_id:number} ){
 		//学生相关总数
-		let Students = await this.Studentservice.getTotalStudent(query.user_id)
+		const Students = await this.Studentservice.getTotalStudent(query.user_id)
 		//方案相关总数
 		const ids = Students.students.map(student => student.id);
 
-		let OptionsTotal = await this.OptionsService.getHomeList(ids)
+		const OptionsTotal = await this.OptionsService.getHomeList(ids)
 		//获取option-school中的院校统计
-		let OptionsSchool = await this.OptionsService.getOptionSchol()
+		const OptionsSchool = await this.OptionsService.getOptionSchol()
 
 		return {
 			code:0,

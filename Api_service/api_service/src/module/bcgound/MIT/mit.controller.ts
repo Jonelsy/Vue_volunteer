@@ -1,9 +1,8 @@
 
 import {MitService} from "./mit.service";
-import {Body, Controller, Get, Param, Post, UseGuards, Headers, Query, Inject} from '@nestjs/common';
-import {ApiOperation,ApiTags,ApiBody,ApiConsumes, ApiBearerAuth, ApiParam,ApiQuery} from '@nestjs/swagger'
+import {Body, Controller, Get, Post, UseGuards} from '@nestjs/common';
+import {ApiOperation,ApiTags,ApiBody,ApiConsumes, ApiBearerAuth} from '@nestjs/swagger'
 import { AuthGuard } from '@nestjs/passport';
-import {Mit} from "./entity/mit.entity";
 
 
 @Controller('mit')

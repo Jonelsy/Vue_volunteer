@@ -111,8 +111,8 @@ export class StudentService {
 
 	//获取学生总数，给optionsService使用
 	async getTotalStudent(user_id:number){
-		let students = await this.student.find({where:{user_id:user_id}})
-		let studentTotal = await this.student.count({where:{user_id:user_id}})
+		const students = await this.student.find({where:{user_id:user_id}})
+		const studentTotal = await this.student.count({where:{user_id:user_id}})
 		return {
 			students,
 			studentTotal

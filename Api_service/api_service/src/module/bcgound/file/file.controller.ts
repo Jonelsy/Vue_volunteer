@@ -30,7 +30,6 @@ export class FileController {
         },
     })) // 指定上传的文件字段名
     async uploadFile(@UploadedFile() file) {
-        const originalName = file.originalname;
         const fileName = file.filename;
         const fileNameWithExt = `${fileName}`;
         return {code:0,data:fileNameWithExt,msg:'上传成功'} // 可以打印出上传的文件信息

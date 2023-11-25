@@ -38,8 +38,8 @@ export class UserService {
 		data.password = user.password
 		//先查找用户
 		return this.existingUser(data).then(async res=>{
-			let subject = openexcript(user.password,res.password)
-			let userID = await this.user.find({where: {username: user.username}})
+			const subject = openexcript(user.password,res.password)
+			const userID = await this.user.find({where: {username: user.username}})
 			if(subject){
 				const user = res
 				return this.createdToken(user).then(res=>{

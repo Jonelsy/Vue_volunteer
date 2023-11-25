@@ -1,6 +1,6 @@
 
 import { StudentService } from './student.service'
-import { Body, Controller, Get, Param, Post, UseGuards,Headers ,Query} from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards ,Query} from '@nestjs/common';
 import {ApiOperation,ApiTags,ApiBody,ApiConsumes, ApiBearerAuth, ApiParam,ApiQuery} from '@nestjs/swagger'
 import { AuthGuard } from '@nestjs/passport';
 @Controller('student')
@@ -52,7 +52,7 @@ export class StudentController {
 	@ApiBearerAuth('jwt')
 	@ApiParam({ name: 'id', description: '学生ID' })
 	async deleteUser(@Param('id') params:string){
-		let id:number = parseInt(params)
+		const id:number = parseInt(params)
 		return await this.StudentService.delStudent(id)
 	}
 	

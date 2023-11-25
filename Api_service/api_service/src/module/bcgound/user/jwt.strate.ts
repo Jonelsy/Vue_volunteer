@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { JWT_CONTANT } from './jwt.contant';
 import { User } from './entity/user.entity';
 import { PassportStrategy } from '@nestjs/passport';
-import { sign,verify,decode } from 'jsonwebtoken';
+import { sign,verify } from 'jsonwebtoken';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {

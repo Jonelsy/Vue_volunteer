@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 //对数据库进行增删改查需引入如下
-import {Repository,Like} from 'typeorm'
+import {Repository} from 'typeorm'
 import {InjectRepository} from '@nestjs/typeorm'
 import {Mit,MitSum,MitExplain} from "./entity/mit.entity";
 
@@ -35,7 +35,7 @@ export class MitService {
             .groupBy('MitSum.type')
             .getRawMany();
         //处理汇总
-        let arrs = []
+        const arrs = []
         for (let i =0;i<=gradesByType.length-2;i+=2) {
             if(gradesByType[i].totalGrade<=gradesByType[i+1].totalGrade){
                 arrs.push(gradesByType[i+1].MitSum_type)

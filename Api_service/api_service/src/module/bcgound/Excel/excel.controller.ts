@@ -12,7 +12,7 @@ export class ExcelController {
     @Header('Content-disposition', 'attachment; filename=file.xlsx')
     @ApiQuery({ name: 'option_id', description: '方案id', required: true, type: Number,example:'1' })
     async exportExcel(@Res() res: Response,@Query() query:{option_id:number}) {
-        let id = query.option_id
+        const id:number = query.option_id
         const data:any = await this.getDataFromDatabase(id); // 获取数据库数据
         const filePath = './xlsxFile/file.xlsx'; // 导出的 Excel 文件路径
         await this.excelService.exportToExcel(data, filePath);

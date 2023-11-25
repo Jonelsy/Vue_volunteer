@@ -1,4 +1,5 @@
 import { Controller, Get, UseGuards ,Query} from '@nestjs/common';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { SchoolService } from './school.service';
 import {ApiOperation,ApiTags,ApiConsumes, ApiBearerAuth,ApiQuery} from '@nestjs/swagger'
 import { AuthGuard } from '@nestjs/passport';

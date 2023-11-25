@@ -4,7 +4,6 @@ import {addexcript} from '../until/encription'
 @Injectable()
 export class CryptoMiddleware implements NestMiddleware {
   use(req: any, res: any, next: () => void) {
-	 let data = req.body
 	 req.body.password = addexcript( req.body.password)
     next();
   }

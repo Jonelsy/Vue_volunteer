@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import * as ExcelJS from 'exceljs';
 import {Option_school,Option_subject} from './entity/file.entity'
 import {InjectRepository} from "@nestjs/typeorm";
-import {Options} from "../options/entity/options.entity";
 import {Repository} from "typeorm";
 @Injectable()
 export class ExcelService {
