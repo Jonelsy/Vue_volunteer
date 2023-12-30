@@ -84,14 +84,23 @@ let ruleForm = reactive<RuleForm>({
   remark: '',
   user_id:Number(localStorage.getItem('userId')),
 })
-
+//自定义分数校验
+const validateRecore = (rule: any, value: any, callback: any) => {
+  console.log(value)
+  if (value === undefined) {
+    callback(new Error('请输入分数'))
+  } else if(value<200||value>630){
+    callback(new Error('分数不合法'))
+  }
+  callback()
+}
 const rules = reactive<FormRules<RuleForm>>({
   stu_name: [
     { required: true, message: '请输入学生姓名', trigger: 'blur' },
     { min: 2, max: 5, message: '姓名长度不合法', trigger: 'blur' },
   ],
   recore: [
-    { required: true, message: '请输入学生分数', trigger: 'blur' },
+    {validator: validateRecore,  trigger: 'blur' },
   ],
   stu_age: [
     { required: true, message: '请输入年龄', trigger: 'blur' },
@@ -140,6 +149,7 @@ const customOptions = {
 };
 //提交
 const submitForm = async (formEl: FormInstance | undefined) => {
+  console.log(formEl)
   if (!formEl) return
   const loading = startCustomLoading(customOptions);
   await formEl.validate((valid, fields) => {
@@ -178,7 +188,8 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       }
 
     } else {
-      console.log('error submit!', fields)
+      stopCustomLoading(loading);
+      ElMessage.error('表单错误')
     }
   })
 }
