@@ -201,22 +201,28 @@ const handleCurrentChange = (value:number)=>{
 //绑定图片
 const uploadRef = ref<UploadInstance>()
 const bandImage = async(res,file)=>{
-  const files = file[0].raw;
-  const formData = new FormData();
-  formData.append('pic', files);
-  let strCode = ''
-  //上传文件
-  uploadFile(formData).then(res=>{
-    //接受file然后调用接口
-    StuMess.value.pic_major=res.data.data
-    //更新学生
-    updataStudent(StuMess.value).then(res=>{
-      ElMessage.success('绑定成功')
-      drawer.value=false
+  //判断文件是否是png格式，图片大小不得超过2mb
+  console.log(file)
+  if(file[0].raw.type!=='image/png'){
+    ElMessage.error('图片格式错误，请确认是png格式')
+  }else if(file[0].raw.size>1000000){
+    ElMessage.error('图片大小应小于10Mb')
+  }else{
+    const files = file[0].raw;
+    const formData = new FormData();
+    formData.append('pic', files);
+    let strCode = ''
+    //上传文件
+    uploadFile(formData).then(res=>{
+      //接受file然后调用接口
+      StuMess.value.pic_major=res.data.data
+      //更新学生
+      updataStudent(StuMess.value).then(res=>{
+        ElMessage.success('绑定成功')
+        drawer.value=false
+      })
     })
-  })
-
-
+  }
 }
 const submit = ()=>{
   uploadRef.value!.submit()
