@@ -57,6 +57,18 @@ export class liberal_school_one_school{
 	@ApiProperty()
 	@Column()
 	AdmissionRegulationsURL:string
+
+	@ApiProperty()
+	@Column()
+	CollegeLevel:string
+
+	@ApiProperty()
+	@Column()
+	CollegeProvince:string
+
+	@ApiProperty()
+	@Column()
+	CollegeCity:string
 	
 	@ApiProperty()
 	@Column()
@@ -180,6 +192,18 @@ export class liberal_school_two_school{
 	@ApiProperty()
 	@Column()
 	AdmissionRegulationsURL:string
+
+	@ApiProperty()
+	@Column()
+	CollegeLevel:string
+
+	@ApiProperty()
+	@Column()
+	CollegeProvince:string
+
+	@ApiProperty()
+	@Column()
+	CollegeCity:string
 	
 	@ApiProperty()
 	@Column()
@@ -303,6 +327,18 @@ export class math_school_one_school{
 	@ApiProperty()
 	@Column()
 	AdmissionRegulationsURL:string
+
+	@ApiProperty()
+	@Column()
+	CollegeLevel:string
+
+	@ApiProperty()
+	@Column()
+	CollegeProvince:string
+
+	@ApiProperty()
+	@Column()
+	CollegeCity:string
 	
 	@ApiProperty()
 	@Column()
@@ -426,6 +462,18 @@ export class math_school_two_school{
 	@ApiProperty()
 	@Column()
 	AdmissionRegulationsURL:string
+
+	@ApiProperty()
+	@Column()
+	CollegeLevel:string
+
+	@ApiProperty()
+	@Column()
+	CollegeProvince:string
+
+	@ApiProperty()
+	@Column()
+	CollegeCity:string
 	
 	@ApiProperty()
 	@Column()
@@ -592,4 +640,16 @@ export class school_one{
 	@ApiProperty()
 	@Column()
 	CollegePath:string
+
+	@ApiProperty()
+	@Column()
+	CollegeLevel:string
+
+	@ApiProperty()
+	@Column()
+	CollegeProvince:string
+
+	@ApiProperty()
+	@Column()
+	CollegeCity:string
 }

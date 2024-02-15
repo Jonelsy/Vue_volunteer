@@ -120,11 +120,20 @@
             </template>
           </el-table-column>
         </el-table-column>
-        <el-table-column label="院校章程" align="center" >
-          <template #default="scope">
-            <el-link type="primary" v-if="scope.row.AdmissionRegulationsURL!=null">点击查看</el-link>
-            <p v-else>{{ scope.row.MajorNotes }}</p>
-          </template>
+        <el-table-column label="院校信息">
+          <el-table-column label="院校层次" width="80" align="center" >
+            <template #default="scope">
+              <p v-if="scope.row.CollegeLevel">{{scope.row.CollegeLevel[0]}}</p>
+            </template>
+          </el-table-column>
+          <el-table-column prop="CollegeProvince" label="院校所在省份" width="80" align="center" />
+          <el-table-column prop="CollegeCity" label="院校所在市区" width="80" align="center" />
+          <el-table-column label="院校章程" align="center" >
+            <template #default="scope">
+              <el-link type="primary" v-if="scope.row.AdmissionRegulationsURL!=null">点击查看</el-link>
+              <p v-else>{{ scope.row.MajorNotes }}</p>
+            </template>
+          </el-table-column>
         </el-table-column>
         <el-table-column label="操作" align="center" >
           <template #default="scope">
@@ -161,9 +170,10 @@ let $route = useRoute()
 interface TableDataItem {
   id: number;
   CollegeCode: number;
+  CollegeLevel:string;
 }
 interface TableData  {
-  tableData: TableDataItem[];
+  tableData: any[];
   userData:any;
   ruleForm: {
     page: number;
@@ -355,6 +365,12 @@ const getSchool = ()=>{
   getItems(data.ruleForm).then(res=>{
     data.tableData=res.data.schools
     data.total=res.data.total
+    //处理学校层次字符串转为数组
+    data.tableData.forEach(item=>{
+      if(item.CollegeLevel){
+        item.CollegeLevel = item.CollegeLevel.slice(2, -2).split("', '")
+      }
+    })
   })
   getOwnerOptions(Number($route.query.option_id)).then(res=>{
     state.selectedRow=res.data

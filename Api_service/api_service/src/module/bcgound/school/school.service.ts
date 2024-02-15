@@ -47,7 +47,6 @@ export class SchoolService {
 		if (query.name) {
 		    queryOptions.where.CollegeName = Like(`%${query.name}%`);
 		  }
-		 console.log(queryOptions);
 		 
 		  
 		//文科

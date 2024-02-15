@@ -22,4 +22,9 @@ TuitionFee：专业学费
 LocationOfSchool：办学地点
 MajorNotes：专业备注
 
+CollegeLevel：学校层次
+CollegeProvince：学校所在省
+CollegeCity：学校所在市
+CollegePath：学校省份编号（无用）
+
 ranking：排名

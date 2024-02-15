@@ -3,7 +3,7 @@
   <div class="layout_nav" :class="{fold:useStore.font?true:false}">
     <sideNav></sideNav>
     <div class="footerRecord" :class="{fold:useStore.font?true:false}">
-      <el-link href="https://beian.miit.gov.cn/" :underline="false" target="_blank">备案号:蒙ICP备2023001811号</el-link>
+      <el-link href="https://beian.miit.gov.cn/" :underline="false" target="_blank">GitHub&&何小雨</el-link>
     </div>
   </div>
   <div class="layout_header" :class="{fold:useStore.font?true:false}">
