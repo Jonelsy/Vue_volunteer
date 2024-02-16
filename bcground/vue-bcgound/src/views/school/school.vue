@@ -25,6 +25,16 @@
                 <el-radio label="1" size="large" border>一本</el-radio>
                 <el-radio label="2" size="large" border>二本</el-radio>
               </el-radio-group>
+              <div style="margin-top: 10px;">
+                <el-check-tag style="margin-right: 5px;margin-top: 5px" :key="index" v-for="(item,index) in data.CollegeProvince" :checked="item.checked"   @change="ChangeCollegePrv(item)">
+                  {{ item.name }}
+                </el-check-tag>
+              </div>
+              <div style="margin-top: 10px;">
+                <el-check-tag style="margin-right: 5px;margin-top: 5px" :key="index" v-for="(item,index) in data.CollegeLevel" :checked="item.checked"  @change="ChangeCollegePrv(item)">
+                  {{ item.name }}
+                </el-check-tag>
+              </div>
             </div>
           </el-card>
         </div>
@@ -126,6 +136,154 @@ let data = reactive({
     subject:'0',
   },
   total:0,
+  CollegeProvince : [
+    {
+      "checked": false,
+      "name": "北京市"
+    },
+    {
+      "checked": false,
+      "name": "天津市"
+    },
+    {
+      "checked": false,
+      "name": "河北省"
+    },
+    {
+      "checked": false,
+      "name": "山西省"
+    },
+    {
+      "checked": false,
+      "name": "内蒙古自治区"
+    },
+    {
+      "checked": false,
+      "name": "辽宁省"
+    },
+    {
+      "checked": false,
+      "name": "吉林省"
+    },
+    {
+      "checked": false,
+      "name": "黑龙江省"
+    },
+    {
+      "checked": false,
+      "name": "上海市"
+    },
+    {
+      "checked": false,
+      "name": "江苏省"
+    },
+    {
+      "checked": false,
+      "name": "浙江省"
+    },
+    {
+      "checked": false,
+      "name": "安徽省"
+    },
+    {
+      "checked": false,
+      "name": "福建省"
+    },
+    {
+      "checked": false,
+      "name": "江西省"
+    },
+    {
+      "checked": false,
+      "name": "山东省"
+    },
+    {
+      "checked": false,
+      "name": "河南省"
+    },
+    {
+      "checked": false,
+      "name": "湖北省"
+    },
+    {
+      "checked": false,
+      "name": "湖南省"
+    },
+    {
+      "checked": false,
+      "name": "广东省"
+    },
+    {
+      "checked": false,
+      "name": "广西壮族自治区"
+    },
+    {
+      "checked": false,
+      "name": "海南省"
+    },
+    {
+      "checked": false,
+      "name": "重庆市"
+    },
+    {
+      "checked": false,
+      "name": "四川省"
+    },
+    {
+      "checked": false,
+      "name": "贵州省"
+    },
+    {
+      "checked": false,
+      "name": "云南省"
+    },
+    {
+      "checked": false,
+      "name": "西藏自治区"
+    },
+    {
+      "checked": false,
+      "name": "陕西省"
+    },
+    {
+      "checked": false,
+      "name": "甘肃省"
+    },
+    {
+      "checked": false,
+      "name": "青海省"
+    },
+    {
+      "checked": false,
+      "name": "宁夏回族自治区"
+    },
+    {
+      "checked": false,
+      "name": "新疆维吾尔自治区"
+    },
+    {
+      "checked": false,
+      "name": "台湾省"
+    },
+    {
+      "checked": false,
+      "name": "香港特别行政区"
+    },
+    {
+      "checked": false,
+      "name": "澳门特别行政区"
+    }
+  ],
+  CollegeLevel:[
+    {
+      checked:false,
+      name:'211'
+    },
+    {
+      checked:false,
+      name:'985'
+    }
+  ]
 })
 //获取学校
 const getSchool = ()=>{
@@ -146,6 +304,11 @@ const handleCurrentChange = (value:number)=>{
   data.ruleForm.page = value;
   getSchool()
 }
+//点击省份标签
+const ChangeCollegePrv = (item:any)=>{
+  item.checked = !item.checked
+}
+
 </script>
 
 <style scoped lang="scss">

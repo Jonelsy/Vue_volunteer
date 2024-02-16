@@ -28,17 +28,24 @@ export class SchoolService {
 		@InjectRepository(school_one) private readonly school_one:Repository<school_one>,){}
 	//获取列表
 	
-	async getSchool(query:{page:number,pageSize:number,name?:string,subject?:number,level:number,ranking?:number}){
+	async getSchool(query:{page:number,pageSize:number,name?:string,subject?:number,level:number,ranking?:number,CollegeProvince?:string,CollegeLevel?:string}){
 		const queryOptions:any = {
 			//此处any类型需要修改
 		    take: query.pageSize,
 		    skip: (query.page - 1) * query.pageSize,
 			order: {CollegeCode:'ASC' as any},
 			where: {
-				
 			} // 初始化查询条件对象
 		  };
-		  
+
+		  //有无地区条件
+		if(query.CollegeProvince){
+			queryOptions.where.CollegeProvince = Like(`%${query.CollegeProvince}%`);
+		}
+		//有无学校层级条件
+		if(query.CollegeLevel){
+			queryOptions.where.CollegeLevel = Like(`%${query.CollegeLevel}%`);
+		}
 		  //有排名无名子（个性化推荐）
 		if (query.ranking) {
 			queryOptions.where.ranking = Between(query.ranking - 500, query.ranking + 2500);
@@ -47,8 +54,8 @@ export class SchoolService {
 		if (query.name) {
 		    queryOptions.where.CollegeName = Like(`%${query.name}%`);
 		  }
-		 
-		  
+
+
 		//文科
 		
 		if(query.subject==0){

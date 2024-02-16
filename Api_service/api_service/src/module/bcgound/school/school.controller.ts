@@ -20,7 +20,9 @@ export class SchoolController {
 	@ApiQuery({ name: 'subject', description: '0文1理', required: true, type: Number,example:'0' })
 	@ApiQuery({ name: 'level', description: '1本2本', required: true, type: Number,example:'1' })
 	@ApiQuery({ name: 'ranking', description: '排名', required: false, type: Number,example:'10427' })
-	async getOption(@Query() query:{page:number,pageSize:number,name?:string,subject:number,level:number,ranking?:number} ){
+	@ApiQuery({ name: 'CollegeProvince', description: '地域（省份）', required: false, type: String,example:'北京市' })
+	@ApiQuery({ name: 'CollegeLevel', description: '层次', required: false, type: String,example:'985' })
+	async getOption(@Query() query:{page:number,pageSize:number,name?:string,subject:number,level:number,ranking?:number,CollegeProvince?:string,CollegeLevel?:string} ){
 		return await this.SchoolService.getSchool(query)
 	}
 
