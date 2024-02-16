@@ -31,7 +31,7 @@
                 </el-check-tag>
               </div>
               <div style="margin-top: 10px;">
-                <el-check-tag style="margin-right: 5px;margin-top: 5px" :key="index" v-for="(item,index) in data.CollegeLevel" :checked="item.checked"  @change="ChangeCollegePrv(item)">
+                <el-check-tag style="margin-right: 5px;margin-top: 5px" :key="index" v-for="(item,index) in data.CollegeLevel" :checked="item.checked" type="success"  @change="ChangeCollegeLev(item)">
                   {{ item.name }}
                 </el-check-tag>
               </div>
@@ -134,9 +134,15 @@ let data = reactive({
     name:'',
     level:'1',
     subject:'0',
+    CollegeProvince:null,
+    CollegeLevel:null,
   },
   total:0,
   CollegeProvince : [
+    {
+      "checked": true,
+      "name": "全部"
+    },
     {
       "checked": false,
       "name": "北京市"
@@ -276,6 +282,10 @@ let data = reactive({
   ],
   CollegeLevel:[
     {
+      checked: true,
+      name: "全部"
+    },
+    {
       checked:false,
       name:'211'
     },
@@ -283,10 +293,15 @@ let data = reactive({
       checked:false,
       name:'985'
     }
-  ]
+  ],
+
 })
 //获取学校
 const getSchool = ()=>{
+  if(data.ruleForm.CollegeProvince=='全部'||data.ruleForm.CollegeLevel=='全部'){
+    data.ruleForm.CollegeProvince = null
+    data.ruleForm.CollegeLevel = null
+  }
   getItems(data.ruleForm).then(res=>{
     data.tableData=res.data.schools
     data.total=res.data.total
@@ -305,8 +320,26 @@ const handleCurrentChange = (value:number)=>{
   getSchool()
 }
 //点击省份标签
-const ChangeCollegePrv = (item:any)=>{
-  item.checked = !item.checked
+interface ChangeCollegePrvType{
+  checked:boolean,
+  name:string
+}
+const ChangeCollegePrv = (item:ChangeCollegePrvType)=>{
+  data.CollegeProvince.forEach(item=>{
+    item.checked = false
+  })
+  item.checked = true
+ data.ruleForm.CollegeProvince = item.name
+  getSchool()
+}
+//点击211.985标签
+const ChangeCollegeLev = (item:ChangeCollegePrvType)=>{
+  data.CollegeLevel.forEach(item=>{
+    item.checked = false
+  })
+  item.checked = true
+  data.ruleForm.CollegeLevel = item.name
+  getSchool()
 }
 
 </script>

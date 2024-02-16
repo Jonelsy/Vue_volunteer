@@ -12,6 +12,8 @@ export const getItems = (data:getOptionType)=>{
             level: data.level,
             subject:data.subject,
             ranking:data.ranking,
+            CollegeProvince:data.CollegeProvince,
+            CollegeLevel:data.CollegeLevel
         }
     })
 }

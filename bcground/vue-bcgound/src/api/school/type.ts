@@ -7,6 +7,8 @@ export interface getOptionType{
     level:string,
     subject:string,
     ranking?:number|null
+    CollegeProvince?:string|null
+    CollegeLevel?:string|null
 }
 export interface getOwnOptionType{
     name?:string,

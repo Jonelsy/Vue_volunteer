@@ -34,11 +34,22 @@ export class SchoolService {
 		    take: query.pageSize,
 		    skip: (query.page - 1) * query.pageSize,
 			order: {CollegeCode:'ASC' as any},
-			where: {
-			} // 初始化查询条件对象
+			where: {}, // 初始化查询条件对象
+
 		  };
 
 		  //有无地区条件
+		//因为接口设计问题，传参使用query，导致当传入数组为一位时（length=1）会导致自动识别为string所欲需要进行判断
+		//TODO多条件查询需要大改后端，添加queryBuilder形式再添加条件查询，但是会破坏已经写好的嵌套条件查询，日后修改
+		// if(!Array.isArray(query.CollegeProvince)){
+		// 	queryOptions.where.CollegeProvince = Like(`%${query.CollegeProvince}%`);
+		// }else{
+		// 	queryOptions.where.CollegeProvince = Like(`%${query.CollegeProvince[0]}%`);
+		// 	//如果为真，确认为数组且数组长度>1
+		// 	await query.CollegeProvince.slice(1).forEach(item=>{
+		// 		queryOptions.where.CollegeProvince = Like (`%${item}%`);
+		// 	})
+		// }
 		if(query.CollegeProvince){
 			queryOptions.where.CollegeProvince = Like(`%${query.CollegeProvince}%`);
 		}
