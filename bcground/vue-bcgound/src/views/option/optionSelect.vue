@@ -45,6 +45,16 @@
                   <el-radio label="1" size="large" border>一本</el-radio>
                   <el-radio label="2" size="large" border>二本</el-radio>
                 </el-radio-group>
+                <div style="margin-top: 10px;">
+                  <el-check-tag style="margin-right: 5px;margin-top: 5px" :key="index" v-for="(item,index) in data.CollegeProvince" :checked="item.checked"   @change="ChangeCollegePrv(item)">
+                    {{ item.name }}
+                  </el-check-tag>
+                </div>
+                <div style="margin-top: 10px;">
+                  <el-check-tag style="margin-right: 5px;margin-top: 5px" :key="index" v-for="(item,index) in data.CollegeLevel" :checked="item.checked" type="success"  @change="ChangeCollegeLev(item)">
+                    {{ item.name }}
+                  </el-check-tag>
+                </div>
               </div>
             </el-card>
           </div>
@@ -123,6 +133,7 @@
         <el-table-column label="院校信息">
           <el-table-column label="院校层次" width="80" align="center" >
             <template #default="scope">
+<!--              TUDO既是985又是211情况显示BUG-->
               <p v-if="scope.row.CollegeLevel">{{scope.row.CollegeLevel[0]}}</p>
             </template>
           </el-table-column>
@@ -182,8 +193,12 @@ interface TableData  {
     level: string;
     subject: string;
     ranking?:number|null,
+    CollegeProvince?:string|null,
+    CollegeLevel?:string|null,
   };
   total: number;
+  CollegeProvince:any,
+  CollegeLevel:any
 }
 let data:TableData = reactive({
   tableData:[],
@@ -195,8 +210,166 @@ let data:TableData = reactive({
     level:'1',
     subject:'0',
     ranking:null,
+    CollegeProvince:'',
+    CollegeLevel:'',
   },
   total:0,
+  CollegeProvince : [
+    {
+      "checked": true,
+      "name": "全部"
+    },
+    {
+      "checked": false,
+      "name": "北京市"
+    },
+    {
+      "checked": false,
+      "name": "天津市"
+    },
+    {
+      "checked": false,
+      "name": "河北省"
+    },
+    {
+      "checked": false,
+      "name": "山西省"
+    },
+    {
+      "checked": false,
+      "name": "内蒙古自治区"
+    },
+    {
+      "checked": false,
+      "name": "辽宁省"
+    },
+    {
+      "checked": false,
+      "name": "吉林省"
+    },
+    {
+      "checked": false,
+      "name": "黑龙江省"
+    },
+    {
+      "checked": false,
+      "name": "上海市"
+    },
+    {
+      "checked": false,
+      "name": "江苏省"
+    },
+    {
+      "checked": false,
+      "name": "浙江省"
+    },
+    {
+      "checked": false,
+      "name": "安徽省"
+    },
+    {
+      "checked": false,
+      "name": "福建省"
+    },
+    {
+      "checked": false,
+      "name": "江西省"
+    },
+    {
+      "checked": false,
+      "name": "山东省"
+    },
+    {
+      "checked": false,
+      "name": "河南省"
+    },
+    {
+      "checked": false,
+      "name": "湖北省"
+    },
+    {
+      "checked": false,
+      "name": "湖南省"
+    },
+    {
+      "checked": false,
+      "name": "广东省"
+    },
+    {
+      "checked": false,
+      "name": "广西壮族自治区"
+    },
+    {
+      "checked": false,
+      "name": "海南省"
+    },
+    {
+      "checked": false,
+      "name": "重庆市"
+    },
+    {
+      "checked": false,
+      "name": "四川省"
+    },
+    {
+      "checked": false,
+      "name": "贵州省"
+    },
+    {
+      "checked": false,
+      "name": "云南省"
+    },
+    {
+      "checked": false,
+      "name": "西藏自治区"
+    },
+    {
+      "checked": false,
+      "name": "陕西省"
+    },
+    {
+      "checked": false,
+      "name": "甘肃省"
+    },
+    {
+      "checked": false,
+      "name": "青海省"
+    },
+    {
+      "checked": false,
+      "name": "宁夏回族自治区"
+    },
+    {
+      "checked": false,
+      "name": "新疆维吾尔自治区"
+    },
+    {
+      "checked": false,
+      "name": "台湾省"
+    },
+    {
+      "checked": false,
+      "name": "香港特别行政区"
+    },
+    {
+      "checked": false,
+      "name": "澳门特别行政区"
+    }
+  ],
+  CollegeLevel:[
+    {
+      checked: true,
+      name: "全部"
+    },
+    {
+      checked:false,
+      name:'211'
+    },
+    {
+      checked:false,
+      name:'985'
+    }
+  ],
 })
 //存储院校及其专业数据
 const state = reactive<{selectedRow:any[]}>({
@@ -415,6 +588,29 @@ const beforeChange1 = async () => {
     await getSchool()
     switchLoading.value = false
   }
+}
+
+//点击省份标签
+interface ChangeCollegePrvType{
+  checked:boolean,
+  name:string
+}
+const ChangeCollegePrv = (item:ChangeCollegePrvType)=>{
+  data.CollegeProvince.forEach((item:any)=>{
+    item.checked = false
+  })
+  item.checked = true
+  data.ruleForm.CollegeProvince = item.name
+  getSchool()
+}
+//点击211.985标签
+const ChangeCollegeLev = (item:ChangeCollegePrvType)=>{
+  data.CollegeLevel.forEach((item:any)=>{
+    item.checked = false
+  })
+  item.checked = true
+  data.ruleForm.CollegeLevel = item.name
+  getSchool()
 }
 </script>
 

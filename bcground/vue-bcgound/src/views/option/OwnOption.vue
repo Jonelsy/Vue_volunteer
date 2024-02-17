@@ -81,6 +81,22 @@
             </template>
           </el-table-column>
         </el-table-column>
+        <el-table-column label="院校信息">
+          <el-table-column label="院校层次" width="80" align="center" >
+            <template #default="scope">
+              <!--              TUDO既是985又是211情况显示BUG-->
+              <p v-if="scope.row.CollegeLevel">{{scope.row.CollegeLevel[0]}}</p>
+            </template>
+          </el-table-column>
+          <el-table-column prop="CollegeProvince" label="院校所在省份" width="80" align="center" />
+          <el-table-column prop="CollegeCity" label="院校所在市区" width="80" align="center" />
+          <el-table-column label="院校章程" align="center" >
+            <template #default="scope">
+              <el-link type="primary" v-if="scope.row.AdmissionRegulationsURL!=null">点击查看</el-link>
+              <p v-else>{{ scope.row.MajorNotes }}</p>
+            </template>
+          </el-table-column>
+        </el-table-column>
         <el-table-column label="院校章程" >
           <template #default="scope">
             <el-link type="primary"  @click="console.log(scope.row)" v-if="scope.row.AdmissionRegulationsURL!=null">点击查看</el-link>
@@ -126,6 +142,9 @@ const getSchool = ()=>{
   getOwnItems(data.ruleForm).then(res=>{
     data.tableData=res.data.schools
     data.total=res.data.total
+    data.tableData.forEach((item:any)=>{
+      item.CollegeLevel = JSON.parse(item.CollegeLevel)
+    })
   })
 }
 getSchool()

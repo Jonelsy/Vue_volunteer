@@ -66,6 +66,18 @@ export class Option_school{
 	@ApiProperty()
 	@Column()
 	AdmissionRegulationsURL:string
+
+	@ApiProperty()
+	@Column()
+	CollegeLevel:string
+
+	@ApiProperty()
+	@Column()
+	CollegeProvince:string
+
+	@ApiProperty()
+	@Column()
+	CollegeCity:string
 	
 	@ApiProperty()
 	@Column()

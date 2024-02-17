@@ -134,8 +134,8 @@ let data = reactive({
     name:'',
     level:'1',
     subject:'0',
-    CollegeProvince:null,
-    CollegeLevel:null,
+    CollegeProvince:'',
+    CollegeLevel:'',
   },
   total:0,
   CollegeProvince : [
@@ -299,8 +299,8 @@ let data = reactive({
 //获取学校
 const getSchool = ()=>{
   if(data.ruleForm.CollegeProvince=='全部'||data.ruleForm.CollegeLevel=='全部'){
-    data.ruleForm.CollegeProvince = null
-    data.ruleForm.CollegeLevel = null
+    data.ruleForm.CollegeProvince = ''
+    data.ruleForm.CollegeLevel = ''
   }
   getItems(data.ruleForm).then(res=>{
     data.tableData=res.data.schools
