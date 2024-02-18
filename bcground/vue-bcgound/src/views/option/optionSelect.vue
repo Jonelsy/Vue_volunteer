@@ -601,6 +601,9 @@ const ChangeCollegePrv = (item:ChangeCollegePrvType)=>{
   })
   item.checked = true
   data.ruleForm.CollegeProvince = item.name
+  if(item.name=='全部'){
+    data.ruleForm.CollegeProvince = ''
+  }
   getSchool()
 }
 //点击211.985标签
@@ -610,6 +613,9 @@ const ChangeCollegeLev = (item:ChangeCollegePrvType)=>{
   })
   item.checked = true
   data.ruleForm.CollegeLevel = item.name
+  if(item.name=='全部'){
+    data.ruleForm.CollegeLevel = ''
+  }
   getSchool()
 }
 </script>

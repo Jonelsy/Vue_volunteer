@@ -118,7 +118,7 @@ const loginSub = async () => {
     }).catch((error: any) => {
       ElMessage({
         type: 'error',
-        message: error
+        message: error.data.mes
       })
       loading.value = false
     })

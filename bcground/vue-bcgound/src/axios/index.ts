@@ -34,7 +34,7 @@ request.interceptors.request.use(
 request.interceptors.response.use(
     response => {
         // 对响应数据做一些操作，比如处理错误码、处理数据结构等
-        if(response.data.code===1){
+        if(response.data.code==1){
             return Promise.reject(response)
         }
         return response;
